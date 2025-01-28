@@ -1,0 +1,4 @@
+Event 900000000: Debug enabler
+Event 900000001-900000008: SCA-NGY events part 1
+Event 900000009-900000010: ENG-DUA events part 1
+Event 900000011-900000025: SCA-NGY events part 2

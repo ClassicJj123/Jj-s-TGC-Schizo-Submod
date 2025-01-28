@@ -1,0 +1,14 @@
+#Enable Debuging/Cheats
+country_event = {
+    id = 900000000
+    title = "EVTNAME900000000"
+    desc = "EVTDESC900000000"
+    picture = "Funny"
+    
+    is_triggered_only = yes
+    
+    option = {
+        name = "EVTOPT900000000"
+        set_country_flag = debug_mode_enabled
+    }   
+}

@@ -1,0 +1,263 @@
+political_decisions = {
+
+###Expansion###
+
+    ##Claim the Angevin Empire##
+    ENG_claim_angevin = {
+        picture = "avengin_empire"
+    
+        potential = { 
+            OR = {
+                tag = ENG
+                tag = ENL
+            }
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            NOT = { has_country_flag = ENG_claim_angevin }
+        }
+    
+        allow = {
+            FRA_418 = { owned_by = THIS }
+            FRA_435 = { owned_by = THIS }
+            426 = { owned_by = THIS }
+            441 = { owned_by = THIS }
+            440 = { owned_by = THIS }
+            FRA_445 = { owned_by = THIS }
+            450 = { owned_by = THIS }
+            447 = { owned_by = THIS }
+            458 = { owned_by = THIS }
+            FRA_442 = { owned_by = THIS }
+            FRA_434 = { owned_by = THIS }
+            FRA_458 = { owned_by = THIS }
+            FRA_420 = {
+                OR = {
+                    owned_by = THIS
+                    owner = {
+                        in_sphere = THIS
+                    }
+                }
+            }
+        }
+    
+        effect = {
+            FRA_418 = { add_core = THIS }
+            FRA_435 = { add_core = THIS }
+            426 = { add_core = THIS }
+            441 = { add_core = THIS }
+            440 = { add_core = THIS }
+            FRA_445 = { add_core = THIS }
+            450 = { add_core = THIS }
+            447 = { add_core = THIS }
+            458 = { add_core = THIS }
+            FRA_442 = { add_core = THIS }
+            FRA_434 = { add_core = THIS }
+            FRA_458 = { add_core = THIS }
+            FRA_420 = { add_core = THIS }
+            badboy = 15
+        }
+    }
+
+    ##Fight for French leadership##
+    ENG_claim_french_leadership = {
+        picture = "avengin_empire"
+    
+        potential = { 
+            OR = {
+                tag = ENG
+                tag = ENL
+            }
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            exists = FRA
+            has_country_flag = ENG_claim_angevin
+            NOT = { has_country_flag = ENG_french_leadership_war }
+        }
+    
+        allow = {
+            NOT = { truce_with = FRA }
+            war = no
+        }
+    
+        effect = {
+            war = {
+            target = FRA
+            attacker_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            defender_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            call_ally = no
+            }
+            set_global_flag = ENG_killing_FRA
+            set_country_flag = ENG_french_leadership_war
+        }
+    }
+
+    ##French Natural Borders##
+
+    #Rhineland
+    DUA_FRA_natural_borders_rhine = {
+        picture = "natural_france"
+    
+        potential = { 
+            tag = DUA
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            NOT = { PRU_575 = { is_core = DUA } }
+        }
+    
+        allow = {
+            #has_country_flag = french_acceptance
+        }
+    
+        effect = {
+            PRU_575 = { add_core = DUA }
+            PRU_396 = { add_core = DUA }
+            BAV_571 = { add_core = DUA }
+            HES_570 = { add_core = DUA }
+            badboy = 5
+        }
+    }
+
+    #Lowlands
+    DUA_FRA_natural_borders_lowlands = {
+        picture = "natural_france"
+    
+        potential = { 
+            tag = DUA
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            NOT = { BEL = { all_core = { is_core = THIS } } }
+        }
+    
+        allow = {
+            #has_country_flag = french_acceptance
+        }
+    
+        effect = {
+            BEL = { all_core = { add_core = THIS } }
+            LUX = { all_core = { add_core = THIS } }
+            NET_381 = { add_core = THIS }
+            380 = { add_core = THIS }
+            379 = { add_core = THIS }
+            badboy = 5
+        }
+    }
+
+    #Integrate Belgium
+    DUA_integrate_BEL = {
+        picture = "natural_france"
+    
+        potential = { 
+            tag = DUA
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            BEL = {
+                in_sphere = THIS
+            }
+        }
+    
+        allow = {
+            #has_country_flag = french_acceptance
+        }
+    
+        effect = {
+            inherit = BEL
+        }
+    }
+
+    #End the Irish Dominion
+    DUA_kill_IRE = {
+        picture = "ireland"
+
+        potential = { 
+            tag = DUA
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            IRE = { is_our_vassal = THIS }
+        }
+    
+        allow = {
+        }
+    
+        effect = {
+            inherit = IRE
+            any_core = {
+                any_pop = {
+                    limit = {
+                        has_pop_culture = irish
+                    }
+                    militancy = 5
+                }
+            }
+        }
+    }
+
+
+###Formables###
+
+    #Form the Dual Monarchy
+    ENG_form_DUA = {
+        picture = "avengin_empire"
+    
+        potential = { 
+            OR = {
+                tag = ENG
+                tag = ENL
+            }
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+        }
+    
+        allow = {
+            OR = {
+                has_country_flag = ENG_able_to_form_DUA
+                AND = {
+                    FRA_404 = { owned_by = THIS }
+                    FRA_406 = { owned_by = THIS }
+                    FRA_411 = { owned_by = THIS }
+                    FRA_412 = { owned_by = THIS }
+                    FRA_418 = { owned_by = THIS }
+                    FRA_420 = { owned_by = THIS }
+                    FRA_425 = { owned_by = THIS }
+                    FRA_428 = { owned_by = THIS }
+                    FRA_432 = { owned_by = THIS }
+                    FRA_434 = { owned_by = THIS }
+                    FRA_435 = { owned_by = THIS }
+                    FRA_438 = { owned_by = THIS }
+                    FRA_439 = { owned_by = THIS }
+                    FRA_442 = { owned_by = THIS }
+                    FRA_445 = { owned_by = THIS }
+                    FRA_451 = { owned_by = THIS }
+                    FRA_452 = { owned_by = THIS }
+                    FRA_455 = { owned_by = THIS }
+                    FRA_457 = { owned_by = THIS }
+                    FRA_458 = { owned_by = THIS }
+                    FRA_461 = { owned_by = THIS }
+                    FRA_467 = { owned_by = THIS }
+                }
+            } 
+        }
+    
+        effect = {
+            change_tag = DUA
+            FRA = { all_core = { add_core = DUA } }
+        }
+    }
+
+}

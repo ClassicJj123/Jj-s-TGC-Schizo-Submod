@@ -1,0 +1,40 @@
+KEY;ENGLISH;FRENCH;GERMAN;POLISH;SPANISH;ITALIAN;SWEDISH;CZECH;HUNGARIAN;DUTCH;PORTUGUESE;RUSSIAN;FINNISH;x
+##################################;;;;;;;;;;;;;;x
+###Basic set up decisions/Debug###;;;;;;;;;;;;;;x
+##################################;;;;;;;;;;;;;;x
+Turn_on_schizo_addon_title;Turn on the Schizo Submod;;;;;;;;;;;;;x
+Turn_on_schizo_addon_desc;Let's have some FUN!;;;;;;;;;;;;;x
+Turn_off_schzio_addon_title;Turn off the Schizo Submod;;;;;;;;;;;;;x
+Turn_off_schzio_addon_desc;Time to take em meds!;;;;;;;;;;;;;x
+Turn_on_schizo_addon_for_everyone_title;Enable Schizo content for AI;;;;;;;;;;;;;x
+Turn_on_schizo_addon_for_everyone_desc;Time for EVERYONE to be crazy!;;;;;;;;;;;;;x
+turn_off_debug_mode_title;Turn off Debug mode;;;;;;;;;;;;;x
+turn_off_debug_mode_desc;Turn off Debug mode?;;;;;;;;;;;;;x
+Clear_infamy_title;Clear Infamy;;;;;;;;;;;;;x
+Clear_infamy_desc;Clear Infamy;;;;;;;;;;;;;x
+lower_militancy_title;Lower Militancy;;;;;;;;;;;;;x
+lower_militancy_desc;Lower Militancy;;;;;;;;;;;;;x
+lower_consciousness_title;Lower Consciousness;;;;;;;;;;;;;x
+lower_consciousness_desc;Lower Consciousness;;;;;;;;;;;;;x
+###################;;;;;;;;;;;;;;x
+###SCA/NGY stuff###;;;;;;;;;;;;;;x
+###################;;;;;;;;;;;;;;x
+SCA_from_NGY_title;Unite the lands of Germany under Nordic leadership;;;;;;;;;;;;;x
+SCA_from_NGY_desc;We have successfully gained total influence of the lands that one would consider part of Germany, due to this, some of the more extremist and radical politicians have brought up the idea of uniting the lands of Germany under our leadership on the basis that we are a germanic people. Since we have been able to influence the lands of Germany, let us become it's head and establish a new Germanic state!;;;;;;;;;;;;;x
+SCA_expand_into_latvia_title;Expand into Latvia;;;;;;;;;;;;;x
+SCA_expand_into_latvia_desc;With our control over Estonia, the power over the baltic sea is now ripe for the taking! However to accomplish this, we must further go down the Baltic coast. Thus we must take control of Latvia! Framåt!;;;;;;;;;;;;;x
+SCA_expand_into_lithuania_title;Expand into Lithuania;;;;;;;;;;;;;x
+SCA_expand_into_lithuania_desc;With our control over the lands of Livonia, control of the baltic sea is all but complete, however, we can still go further. Thus let us expand into Lithuania to achieve total control of the Baltic Sea!;;;;;;;;;;;;;x
+SCA_expand_into_germanic_coast_title;Expand into the Germanic coast;;;;;;;;;;;;;x
+SCA_expand_into_germanic_coast_desc;We have declared our interest to influence the Germanic sphere, thus it is only natural we claim the lands at the mouth of the Baltic sea in order to cement our control over it! Framåt!;;;;;;;;;;;;;x
+SCA_declare_german_leadership_intention_title;Declare our intentions in Germany;;;;;;;;;;;;;x
+SCA_declare_german_leadership_intention_desc;For decades the germanic cultures have drifted apart from one another, with languages spoken in what is now Scandinavia having splinter off from the Germanic languages of Germany to the point that many would consider them too different to attempt to co-exist. This is however, untrue! Thus let us announce our intentions to fight for German leadership, no longer will Germany and Scandinavia be two separate entities, but merely two regions in a greater state of Germania! För fosterlandet! För Germanien!;;;;;;;;;;;;;x
+###################;;;;;;;;;;;;;;x
+###ENG/DUA stuff###;;;;;;;;;;;;;;x
+###################;;;;;;;;;;;;;;x
+ENG_claim_angevin_title;Claim the Empire of the Angevin;;;;;;;;;;;;;x
+ENG_claim_angevin_desc;While the Angevin family may have died out, with it, any hopes of claiming the lands of france, we have managed to to regain these lands through the rights of conquest. Thus, with the support of the more extremist politicians, we shall revive the Angevin claims! For the Queen!;;;;;;;;;;;;;x
+ENG_claim_french_leadership_title;Claim French Leadership;;;;;;;;;;;;;x
+ENG_claim_french_leadership_desc;We have renewed our claims to the lands of the Angevin, thus it is only natural we renew our claims on the french throne. For the Queen!;;;;;;;;;;;;;x
+ENG_form_DUA_title;Unite the two Kingdoms!;;;;;;;;;;;;;x
+ENG_form_DUA_desc;With our uncontested leadership of the French Kingdom, it's time to unite our two Kingdoms into one, a Dual Monarchy one might say;;;;;;;;;;;;;x

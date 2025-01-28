@@ -1,0 +1,141 @@
+political_decisions = {
+
+###Prussian decisions###
+
+    #Deal with the Prussian problem
+    NGY_deal_with_prussia = {
+        picture = "SCA_Germania"
+        potential = {
+            tag = NGY
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            has_global_flag = prussian_problem_unresolved
+        }
+
+        allow = {
+
+        }
+
+        effect = {
+            country_event = 900000002
+	    }
+    }
+
+    ##Full Autonomy##
+
+    #Annex Prussia
+    NGY_annex_PRU_full_autonomy = {
+        picture = "SCA_Germania"
+        potential = {
+            tag = NGY
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            has_global_flag = prussian_full_autonomy
+            NOT = { has_global_flag = prussia_integrated }
+        }
+
+        allow = {
+            PRU = {
+                OR = {
+                    ruling_party_ideology = anarcho_liberal
+                    ruling_party_ideology = liberal
+                }
+                average_militancy = 5
+            }
+        }
+
+        effect = {
+            country_event = 900000011
+	    }
+    }
+
+    ##Limited Autonomy##
+
+    #Put down Separatists (OR whack a mole)
+    NGY_deal_with_separatist = {
+        picture = "SCA_Germania"
+        potential = {
+            tag = NGY
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            has_global_flag = prussian_separatist_problem
+        }
+
+        allow = {
+            money = 600000 #What, you need to pay people to go through the whole of Prussia
+            NOT = { has_country_modifier = prussian_separatist_cooldown }
+        }
+
+        effect = {
+            treasury = -500000
+            random_list = {
+                10 = { country_event = 900000017 }
+                30 = { country_event = 900000016 }
+                60 = { country_event = 900000015 }
+            }
+	    }
+    }
+
+    #Annex Prussia
+    NGY_annex_PRU_limited_autonomy = {
+        picture = "SCA_Germania"
+        potential = {
+            tag = NGY
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            has_global_flag = prussian_limited_autonomy
+            NOT = { has_global_flag = prussia_integrated }
+        }
+
+        allow = {
+            check_variable = { which = prussian_separatist_problem value = 1 }
+        }
+
+        effect = {
+            country_event = 900000011
+	    }
+    }
+
+    ##Send the Army path##
+
+    #Kill the renegade prussia
+    NGY_kill_PRU = {
+        picture = "SCA_Germania"
+        potential = {
+            tag = NGY
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            has_global_flag = prussia_waiting_to_die
+        }
+
+        allow = {
+        }
+
+        effect = {
+            war = {
+                target = PRU
+                attacker_goal = {
+                    casus_belli = conquest_any
+                }
+                defender_goal = {
+                    casus_belli = custom_treaty_cb
+                }
+                call_ally = no
+            }
+            clr_global_flag = prussia_waiting_to_die
+            set_global_flag = NGY_killing_renegade_prussia
+            PRU = { country_event = 900000022 }
+        }
+    }
+
+}

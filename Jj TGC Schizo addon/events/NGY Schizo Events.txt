@@ -1,0 +1,791 @@
+###Intro event to problems###
+
+    country_event = {
+        id = 900000001
+        title = "EVTNAME900000001"
+        desc = "EVTDESC900000001"
+        picture = "placeholder"
+    
+        trigger = {
+            tag = NGY
+        }
+    
+        mean_time_to_happen = {
+            days = 15
+        }
+
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000001"
+            set_global_flag = prussian_problem_unresolved
+            set_global_flag = southern_problem_unresolved
+            set_global_flag = rhenish_problem_unresolved
+            any_owned = {
+                limit = {
+                    is_core = PRU
+                }
+                add_province_modifier = { name = prussian_separatist duration = -1 }
+            }
+            any_owned = {
+                limit = {
+                    is_core = RHI
+                }
+                add_province_modifier = { name = rhine_gatherings duration = -1 }
+            }
+            any_owned = {
+                limit = {
+                    OR = {
+                        is_core = BAD
+                        is_core = WUR
+                        is_core = BAV
+                        is_core = HOH
+                    }
+                }
+                add_province_modifier = { name = southern_catholic_partisans duration = -1 }
+            }
+        }   
+    }
+
+###Prussian Event Chain###
+
+    #The Prussian Specter looms
+    country_event = {
+        id = 900000002
+        title = "EVTNAME900000002"
+        desc = "EVTDESC900000002"
+        picture = "placeholder"
+    
+        is_triggered_only = yes
+    
+        #full autonomy
+        option = {
+            name = "EVTOPTA900000002"
+            clr_global_flag = prussian_problem_unresolved
+            set_global_flag = prussian_problem_resolved
+            set_global_flag = prussian_full_autonomy
+            any_owned = {
+                limit = {
+                    has_province_modifier = prussian_separatist
+                }
+                remove_province_modifier = prussian_separatist
+            }
+            any_owned = {
+                imit = {
+                    is_core = PRU
+                    NOT = {
+                        OR = {
+                            is_core = RHI
+                            is_core = WES
+                        }
+                    }
+                }
+                secede_province = PRU
+            }
+            create_vassal = PRU
+            diplomatic_influence = {
+	            who = PRU
+	            value = 400
+            }
+            country_event = { id = 900000013 days = 14 }
+            prestige = -50
+        }  
+
+        #limited autonomy
+        option = {
+            name = "EVTOPTB900000002"
+            clr_global_flag = prussian_problem_unresolved
+            set_global_flag = prussian_problem_resolved
+            set_global_flag = prussian_limited_autonomy
+            any_owned = {
+                limit = {
+                    has_province_modifier = prussian_separatist
+                }
+                remove_province_modifier = prussian_separatist
+            }
+            any_owned = {
+                limit = {
+                    is_core = PRU
+                    NOT = {
+                        OR = {
+                            is_core = RHI
+                            is_core = WES
+                            province_id = 553
+                            province_id = 557
+                            province_id = 556
+                            province_id = 554
+                            province_id = 3304
+                        }
+                    }
+                }
+                secede_province = PRU
+            }
+            create_vassal = PRU
+            diplomatic_influence = {
+	            who = PRU
+	            value = 400
+            }
+            PRU = {
+                overnment = colonial_company
+            }
+            set_variable = { which = prussian_separatist value = 5 }
+            add_accepted_culture = north_german
+            country_event = { id = 900000014 days = 15 }
+            prestige = -25
+        }
+
+        #kill em
+        option = {
+            name = "EVTOPTC900000002"
+            set_global_flag = put_down_prussia
+            country_event = { id = 900000019 days = 25 }
+        }
+    }
+
+    ##Full Autonomy##
+
+    #Prussia integrates! (If the AI somehow got liberal and have 5 militancy)
+    country_event = {
+        id = 900000011
+        title = "EVTNAME900000011"
+        desc = "EVTDESC900000011"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        option = {
+            name = "EVTOPTA900000011"
+            inherit = PRU
+            clr_global_flag = prussian_full_autonomy
+            clr_global_flag = prussian_limited_autonomy
+            clr_global_flag = prussian_separatist_problem
+            set_global_flag = NGY_able_to_integrate_north_germany
+            prestige = 50
+            PRU = { 
+                all_core = {
+                    limit = {
+                        NOT = {
+                            OR = {
+                                is_core = RHI
+                                is_core = WES
+                            }
+                        }
+                    }
+                    add_core = THIS
+                }
+            }
+        } 
+    }
+
+    #Prussia Revolts! (In a war with 45% war exhaustion)
+    country_event = {
+        id = 900000012
+        title = "EVTNAME900000012"
+        desc = "EVTDESC900000012"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = NGY
+            PRU = { is_vassal = yes }
+            has_global_flag = prussian_full_autonomy
+            war_exhaustion = 45
+            NOT = { PRU = { truce_with = THIS } }
+        }
+        
+        mean_time_to_happen = {
+            days = 15
+        }
+    
+        fire_only_once = yes
+        option = {
+            name = "EVTOPTA900000012"
+            release = PRU
+            war = {
+                target = PRU
+                attacker_goal = {
+                    casus_belli = make_puppet
+                }
+                defender_goal = {
+                    casus_belli = status_quo
+                }
+                call_ally = no
+            }
+        }
+    }
+
+    #Separatist Fervor Die Down (Merely flavor text lmao)
+    country_event = {
+        id = 900000013
+        title = "EVTNAME900000013"
+        desc = "EVTDESC900000013"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        option = {
+            name = "EVTOPTA900000013"
+            add_accepted_culture = north_german
+        }   
+    }
+
+    ##Limited Autonomy##
+    
+    #Separatist Fervor Stalls (Set up Separatist mini game)
+    country_event = {
+        id = 900000014
+        title = "EVTNAME900000014"
+        desc = "EVTDESC900000014"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        option = {
+            name = "EVTOPTA900000014"
+            set_global_flag = prussian_separatist_problem
+            set_variable = { which = prussian_separatist value = 5 }
+            add_accepted_culture = north_german
+        }       
+    }
+
+    #Successful raid
+    country_event = {
+        id = 900000015
+        title = "EVTNAME900000015"
+        desc = "EVTDESC900000015"
+        picture = Picture
+        
+        is_triggered_only = yes
+        
+        option = {
+            name = "EVTOPTA900000015"
+            PRU = {
+                any_pop = {
+                    militancy = -1
+                }
+            }
+            change_variable = { which = prussian_separatist value = -1 }
+            add_country_modifier = { name = prussian_separatist_cooldown duration = 175 }
+        }  
+    }
+
+    #A Newspaper published a article about our crackdowns
+    country_event = {
+        id = 900000016
+        title = "EVTNAME900000016"
+        desc = "EVTDESC900000016"
+        picture = Picture
+        
+        is_triggered_only = yes
+        
+        option = {
+            name = "EVTOPTA900000016"
+            PRU = {
+                any_pop = {
+                    militancy = 1
+                }
+            }
+            change_variable = { which = prussian_separatist value = 1 }
+            add_country_modifier = { name = prussian_separatist_cooldown duration = 365 }
+        }   
+    }
+
+    #Protest erupt from our actions
+    country_event = {
+        id = 900000017
+        title = "EVTNAME900000017"
+        desc = "EVTDESC900000017"
+        picture = Picture
+        
+        is_triggered_only = yes
+        
+        option = {
+            name = "EVTOPTA900000017"
+            PRU = {
+                any_pop = {
+                    militancy = 2
+                }
+            }
+            change_variable = { which = prussian_separatist value = 2 }
+            add_country_modifier = { name = prussian_separatist_cooldown duration = 425 }
+        }   
+    }
+
+    #Prussia Revolts! (Variable = 10, unluckly if you got here)
+    country_event = {
+        id = 900000018
+        title = "EVTNAME900000018"
+        desc = "EVTDESC900000018"
+        picture = Picture
+        
+        trigger = {
+            tag = NGY
+            has_global_flag = prussian_limited_autonomy
+            has_global_flag = prussian_separatist_problem
+            check_variable = { which = prussian_separatist value = 10 }
+        }
+        
+        mean_time_to_happen = {
+            days = 15
+        }
+
+        option = {
+            name = "EVTOPTA900000018"
+            clr_global_flag = prussian_limited_autonomy
+            set_global_flag = put_down_prussia
+            clr_global_flag = prussian_separatist_problem
+            remove_accepted_culture = north_german
+            country_event = { id = 900000019 days = 25 } #Move to putting down prussia chain
+        }    
+    }
+
+    ##Put Down Prussia##
+
+    #Prussia in Peril (Mostly Flavor text lmao)
+    country_event = {
+        id = 900000019
+        title = "EVTNAME900000019"
+        desc = "EVTDESC900000019"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        #Send in the army!
+        option = {
+            name = "EVTOPTA900000019"
+            any_owned = {
+                limit = {
+                    is_core = PRU
+                }
+                militancy = 5
+            }
+            random_list = {
+                40 = { country_event = { id = 900000020 days = 30 } }
+                60 = { country_event = { id = 900000021 days = 40 } }
+            }
+        }    
+    }
+
+    #Army is Successful (This sets up the Separatist mini game, basically bring you to the last part of that path)
+    country_event = {
+        id = 900000020
+        title = "EVTNAME900000020"
+        desc = "EVTDESC900000020"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        option = {
+            name = "EVTOPTA900000020"
+            clr_global_flag = put_down_prussia
+            set_global_flag = prussian_limited_autonomy
+            set_variable = { which = prussian_separatist value = 8 } #HA! If luck isn't on your side, expect to do this again
+            set_global_flag = prussian_separatist_problem
+        }  
+    }
+
+    #The Army fails (Lol, Lmao even)
+    country_event = {
+        id = 900000021
+        title = "EVTNAME900000021"
+        desc = "EVTDESC900000021"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        option = {
+            name = "EVTOPTA900000021"
+            release = PRU
+            any_owned = {
+                limit = {
+                    is_core = PRU
+                    NOT = {
+                        OR = {
+                            is_core = WES
+                            is_core = RHI
+                        }
+                    }
+                }
+                secede_province = PRU
+            }
+            set_global_flag = prussia_waiting_to_die
+        }    
+    }
+
+    #Prussia event
+    #THE NORDICS ARE HERE
+    country_event = {
+        id = 900000022
+        title = "EVTNAME900000022"
+        desc = "EVTDESC900000022"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+
+        #Do or Die
+        option = {
+            name = "EVTOPTA900000022"
+            PRU = { add_country_modifier = { name = taiping_draft duration = -1 } }
+            random_list = {
+                40 = { add_country_modifier = { name = prussian_general_staff duration = -1 } } #Buff for the AI if Russia doesn't join
+                60 = { set_global_flag = RUS_shows_interest }
+            }
+        }  
+    }
+
+    #Russia event
+    #Prussia in trouble, should we help?
+    country_event = {
+        id = 900000023
+        title = "EVTNAME900000023"
+        desc = "EVTDESC900000023"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = RUS
+            neighbour = PRU
+            has_global_flag = RUS_shows_interest
+        }
+        
+        mean_time_to_happen = {
+            days = 15
+        }
+        
+        #Help them
+        option = {
+            name = "EVTOPTA900000023"
+            clr_global_flag = RUS_shows_interest
+            set_global_flag = NGY_war_with_RUS
+            war = {
+                target = NGY
+                attacker_goal = {
+                    casus_belli = custom_treaty_cb
+                }
+                defender_goal = {
+                    casus_belli = status_quo
+                }
+                call_ally = no
+            }
+            ai_chance = { factor = 70 }
+        }
+        
+        #Refuse them
+        option = {
+            name = "EVTOPTB900000023"
+            prestige = -10
+            ai_chance = { factor = 30 }
+        }
+        
+    }
+
+    ##Scripted peace deals##
+
+    #Prussia gets annexed (Flavor text lmao)
+    country_event = {
+        id = 900000024
+        title = "EVTNAME900000024"
+        desc = "EVTDESC900000024"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = NGY
+            NOT = { exists = PRU }
+            has_global_flag = NGY_killing_renegade_prussia
+        }
+        
+        mean_time_to_happen = {
+            days = 0
+        }
+    
+        option = {
+            name = "EVTOPTA900000024"
+            clr_global_flag = NGY_killing_renegade_prussia
+            country_event = 900000020
+        }   
+    }
+
+    #Prussia wins
+    #Oh damn
+    country_event = {
+        id = 900000025
+        title = "EVTNAME900000025"
+        desc = "EVTDESC900000025"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = NGY
+            has_global_flag = NGY_killing_renegade_prussia
+            has_country_flag = custom_treaty_loser
+        }
+        
+        mean_time_to_happen = {
+            days = 15
+        }
+
+        option = {
+            name = "EVTOPTA900000025"
+            clr_global_flag = put_down_prussia
+            clr_country_flag = custom_treaty_loser
+            clr_global_flag = NGY_killing_renegade_prussia
+            set_global_flag = NGY_collapse_possible
+            prestige = -75
+        }
+    }
+
+    #Russia wins
+    #Russia Enforces Prussian independence
+    country_event = {
+        id = 900000026
+        title = "EVTNAME900000026"
+        desc = "EVTDESC900000026"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = NGY
+            has_global_flag = NGY_war_with_RUS
+            has_country_flag = custom_treaty_loser
+        }
+        
+        mean_time_to_happen = {
+            days = 0
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000026"
+            #Release Prussia if they got annexed
+            any_owned = {
+                limit = {
+                    is_core = PRU
+                    NOT = {
+                        OR = {
+                            is_core = RHI
+                            is_core = WES
+                            is_core = HES
+                        }
+                    }
+                }
+                secede_province = PRU
+            }
+            #White Peace Prussia if they are still in war
+            end_war = PRU
+            #flag removal
+            clr_global_flag = put_down_prussia
+            clr_country_flag = custom_treaty_loser
+            clr_global_flag = NGY_killing_renegade_prussia
+            clr_global_flag = NGY_war_with_RUS
+            set_global_flag = NGY_collapse_possible_PRU_lost
+        } 
+    }
+
+    ##Collapse chain##
+
+    #Cracks Around the Edges (Flavor text)
+    country_event = {
+        id = 900000027
+        title = "EVTNAME900000027"
+        desc = "EVTDESC900000027"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = NGY
+            has_global_flag = NGY_collapse_possible_PRU_lost
+        }
+        
+        mean_time_to_happen = {
+            days = 15
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000027"
+            clr_global_flag = NGY_collapse_possible_PRU_lost
+            set_global_flag = NGY_collapse_PRU_lost_ver
+        } 
+    }
+
+    #The South Declares Independence!
+    country_event = {
+        id = 900000028
+        title = "EVTNAME900000028"
+        desc = "EVTDESC900000028"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = NGY
+            has_global_flag = NGY_collapse_PRU_lost_ver
+        }
+        
+        mean_time_to_happen = {
+            days = 64
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000028"
+            any_owned = {
+                limit = {
+                    OR = {
+                        is_core = BAV
+                        is_core = BAD
+                        is_core = WUR
+                        is_core = HOG
+                        is_core = HOH
+                        is_core = BOH
+                        is_core = AUS
+                    }
+                }
+                secede_province = SGF
+                add_core = SGF
+            }
+            create_vassal = SGF
+            set_global_flag = NGY_collapse_SGF_free_PRU_lost
+        } 
+    }
+
+    #Republic of the Rhine
+    country_event = {
+        id = 900000029
+        title = "EVTNAME900000029"
+        desc = "EVTDESC900000029"
+        picture = Picture
+        
+        trigger = {
+            tag = NGY
+            has_global_flag = NGY_collapse_SGF_free_PRU_lost
+        }
+        
+        mean_time_to_happen = {
+            days = 128
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000029"
+            any_owned = {
+                limit = {
+                    OR = {
+                        is_core = RHI
+                        is_core = WES
+                    }
+                }
+                secede_province = RHI
+                add_core = RHI
+            }
+            create_vassal = RHI
+            RHI = {
+                government = democracy
+            }
+            set_global_flag = NGY_collapse_RHI_free_PRU_lost
+        } 
+    }
+
+    #Major: Germany in Peril
+    country_event = {
+        id = 900000030
+        title = "EVTNAME900000030"
+        desc = "EVTDESC900000030"
+        major = yes
+        
+        trigger = {
+            tag = NGY
+            has_global_flag = NGY_collapse_RHI_free_PRU_lost
+        }
+        
+        mean_time_to_happen = {
+            days = 100
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000030"
+            release_vassal = RHI
+            release_vassal = SGF
+            SGF = {
+                add_country_modifier = { name = taiping_draft duration = -1 }
+            }
+            RHI = {
+                add_country_modifier = { name = taiping_draft duration = -1 }
+            }
+            war = {
+                target = SGF
+                attacker_goal = {
+                    casus_belli = conquest_any
+                }
+                defender_goal = {
+                    casus_belli = status_quo
+                }
+                call_ally = no
+            }
+            war = {
+                target = RHI
+                attacker_goal = {
+                    casus_belli = conquest_any
+                }
+                defender_goal = {
+                    casus_belli = status_quo
+                }
+                call_ally = no
+            }
+        } 
+    }
+
+    #End of the Nordic dream
+    #Lmao, you lost to upstarts!
+    country_event = {
+        id = 900000031
+        title = "EVTNAME900000031"
+        desc = "EVTDESC900000031"
+        major = yes
+        
+        trigger = {
+            tag = NGY
+            has_global_flag = NGY_collapse_SGF_free_PRU_lost
+            has_global_flag = NGY_collapse_RHI_free_PRU_lost
+        }
+        
+        mean_time_to_happen = {
+            days = 0
+        }
+    
+        fire_only_once = yes
+        option = {
+            name = "EVTOPTA900000031"
+            any_owned = {
+                limit = {
+                    OR = {
+                        is_core = HAN
+                        is_core = BRA
+                        is_core = BRE
+                        is_core = OLD
+                        is_core = LIP
+                        is_core = SCL
+                        province_id = 3301
+                        province_id = 3422 
+                    }
+                    secede_province = RHI
+                    add_core = RHI
+                }
+            }
+            any_owned = {
+                limit = {
+                    is_core = SAX
+                }
+                secede_province = SGF
+            }
+            GER = {
+                all_core = {
+                    limit = {
+                        NOT = { owned_by = THIS }
+                    }
+                    remove_core = NGY
+                }
+            }
+            change_tag = SCA
+        }
+    }
+

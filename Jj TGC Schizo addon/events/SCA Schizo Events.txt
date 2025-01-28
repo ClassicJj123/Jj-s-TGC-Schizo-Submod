@@ -1,0 +1,1056 @@
+###Misc Events###
+
+#Eastern Border secure
+country_event = {
+    id = 900000026
+    title = "EVTNAME900000026"
+    desc = "EVTDESC900000026"
+    picture = "placeholder"
+    
+    trigger = {
+        tag = SCA
+        FIN = { all_core = { owned_by = THIS } }
+        KRL = { all_core = { owned_by = THIS } }
+        EST = { all_core = { owned_by = THIS } }
+    }
+    
+    mean_time_to_happen = {
+        days = 15
+    }
+
+    fire_only_once = yes
+
+    option = {
+        name = "EVTOPTA900000026"
+        set_global_flag = SCA_east_secure
+    }  
+}
+
+###Scripted Wars###
+
+#Victory against Prussia
+country_event = {
+    id = 900000003
+    title = "EVTNAME900000003"
+    desc = "EVTDESC900000003"
+    picture = "placeholder"
+    
+    trigger = {
+        tag = SCA
+        has_global_flag = SCA_killing_PRU
+        PRU = { has_country_flag = custom_treaty_loser }
+    }
+    
+    mean_time_to_happen = {
+        days = 0
+    }
+
+    fire_only_once = yes
+
+    #Dismantle Prussia
+    option = {
+        name = "EVTOPTA900000003"
+        inherit = PRU
+        any_owned = {
+            limit = {
+                is_core = RHI
+            }
+            secede_province = RHI
+        }
+        any_owned = {
+            limit = {
+                is_core = WES
+            }
+            secede_province = WES
+        }
+        any_owned = {
+            limit = {
+                is_core = PZN
+            }
+            secede_province = PZN
+        }
+        any_owned = {
+            limit = {
+                is_core = SLS
+            }
+            secede_province = SLS
+        }
+        PRU_553 = { secede_province = SAX }
+        any_owned = {
+            limit = {
+                NOT = {
+                    OR = {
+                        is_core = PML
+                        is_core = THIS
+                        is_core = HOL
+                        is_core = MEC
+                        is_core = MST
+                        is_core = SCH
+                        province_id = 3300
+                        province_id = 530
+                        province_id = 3484
+                        province_id = 548
+                        province_id = 547
+                        province_id = 546
+                        province_id = 679
+                        province_id = 680
+                        province_id = 692
+                    }
+                }
+            }
+            secede_province = PRU
+        }
+        create_vassal = PRU
+        create_vassal = RHI
+        create_vassal = WES
+        create_vassal = PZN
+        create_vassal = SLS
+        diplomatic_influence = {
+	        who = PRU
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = RHI
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = WES
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = PZN
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = SLS
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = SAX
+	        value = 200
+        }
+        PRU = { clr_country_flag = custom_treaty_loser }
+        clr_global_flag = SCA_killing_PRU
+        badboy = 15
+        set_country_flag = german_north_under_SCA
+    }  
+}
+
+#Victory against SCA
+#We have lost
+country_event = {
+    id = 900000004
+    title = "EVTNAME900000004"
+    desc = "EVTDESC900000004"
+    picture = "placeholder"
+    
+    trigger = {
+        tag = SCA
+        has_country_flag = custom_treaty_loser
+        OR = {
+            has_global_flag = SCA_killing_PRU
+            has_global_flag = SCA_killing_NGF
+            has_global_flag = SCA_killing_GER
+        }
+    }
+    
+    mean_time_to_happen = {
+        days = 0
+    }
+
+    fire_only_once = yes
+
+    option = {
+        name = "EVTOPTA900000004"
+        clr_country_flag = custom_treaty_loser
+        clr_global_flag = SCA_killing_PRU
+        clr_global_flag = SCA_killing_NGF
+        clr_global_flag = SCA_killing_GER
+        clr_global_flag = SCA_german_leadership #No more free cbs for you
+    }
+}
+
+#Victory against NGF
+country_event = {
+    id = 900000005
+    title = "EVTNAME900000005"
+    desc = "EVTDESC900000005"
+    picture = "placeholder"
+    
+    trigger = {
+        tag = SCA
+        has_global_flag = SCA_killing_NGF
+        NGF = { has_country_flag = custom_treaty_loser }
+    }
+    
+    mean_time_to_happen = {
+        days = 0
+    }
+
+    fire_only_once = yes
+
+    option = {
+        name = "EVTOPTA900000005"
+        inherit = NGF
+        any_owned = {
+            limit = {
+                OR = {
+                    is_core = RHI
+                    province_id = 3397
+                }
+            }
+            secede_province = RHI
+        }
+        any_owned = {
+            limit = {
+                OR = {
+                    is_core = HAN
+                    is_core = BRA
+                    is_core = BRE
+                    is_core = OLD
+                    is_core = LIP
+                    is_core = SCL
+                    province_id = 3301
+                    province_id = 3422 
+                }
+                NOT = { province_id = 3300 }
+            }
+            secede_province = HAN
+        }
+        any_owned = {
+            limit = {
+                is_core = WES
+            }
+            secede_province = WES
+        }
+        any_owned = {
+            limit = {
+                is_core = PZN
+            }
+            secede_province = PZN
+            add_core = PRU
+        }
+        any_owned = {
+            limit = {
+                is_core = SLS
+            }
+            secede_province = SLS
+            add_core = PRU
+        }
+        any_owned = {
+            limit = {
+                OR = {
+                    is_core = SAX
+                    is_core = SWG
+                    is_core = SRS
+                    is_core = WEI
+                    is_core = ATB
+                    is_core = REU
+                    is_core = COB
+                    is_core = MEI
+                    is_core = RLE
+                    is_core = ANH
+                    is_core = ANK
+                    is_core = ANB
+                    is_core = RSR
+                    province_id = 3305
+                }
+            }
+            secede_province = SAX
+        }
+        any_owned = {
+            limit = {
+                OR = {
+                    is_core = HES
+                    is_core = HEK
+                    is_core = FRM
+                    is_core = WLD
+                    is_core = NAS
+                    is_core = HEH
+                    province_id = 3270
+                    province_id = 3270
+                }
+            }
+            secede_province = HES
+        }
+        PRU_553 = { 
+            secede_province = SAX
+            add_core = PRU
+        }
+        any_owned = {
+            limit = {
+                NOT = {
+                    OR = {
+                        is_core = PML
+                        is_core = THIS
+                        is_core = HOL
+                        is_core = MEC
+                        is_core = MST
+                        is_core = SCH
+                        is_core = HAM
+                        is_core = ALS
+                        province_id = 3300
+                        province_id = 530
+                        province_id = 3484
+                        province_id = 548
+                        province_id = 547
+                        province_id = 546
+                        province_id = 679
+                        province_id = 680
+                        province_id = 692
+                    }
+                }
+            }
+            secede_province = PRU
+            add_core = PRU
+        }
+        create_vassal = PRU
+        create_vassal = RHI
+        create_vassal = WES
+        create_vassal = PZN
+        create_vassal = SLS
+        create_vassal = HES
+        create_vassal = SAX
+        create_vassal = HAN
+        diplomatic_influence = {
+	        who = PRU
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = HAN
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = RHI
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = WES
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = PZN
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = SLS
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = SAX
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = HES
+	        value = 400
+        }
+        PRU_546 = { add_core = PRU }
+        PRU_690 = { add_core = PRU }
+        NGF = { clr_country_flag = custom_treaty_loser }
+        badboy = 20
+        clr_global_flag = SCA_killing_NGF
+        set_country_flag = german_north_under_SCA
+    }  
+}
+
+#Victory over Austria
+country_event = {
+    id = 900000006
+    title = "EVTNAME900000006"
+    desc = "EVTDESC900000006"
+    picture = "placeholder"
+    
+    trigger = {
+        tag = SCA
+        has_global_flag = SCA_killing_AUS
+        AUS = { has_country_flag = custom_treaty_loser }
+    }
+    
+    mean_time_to_happen = {
+        days = 0
+    }
+
+    fire_only_once = yes
+    
+    #Take only SGF
+    option = {
+        name = "EVTOPTA900000006"
+        AUS = {
+            any_owned = {
+                limit = {
+                    OR = {
+                        is_core = BAV
+                        is_core = BAD
+                        is_core = WUR
+                        is_core = SGM
+                        is_core = HOH
+                    }
+                }
+                secede_province =THIS
+            }
+        }
+        any_owned = {
+             limit = {
+                 is_core = BAV
+            }
+            secede_province = BAV
+            remove_core = AUS
+         }
+        any_owned = {
+             limit = {
+                is_core = BAD
+             }
+            secede_province = BAD
+            remove_core = AUS
+        }
+        any_owned = {
+            limit = {
+                OR= {
+                    is_core = WUR
+                    is_core = SGM
+                    is_core = HOH
+                }
+            }
+            secede_province = WUR
+            remove_core = AUS
+        }
+        create_vassal = BAV
+        create_vassal = BAD
+        create_vassal = WUR
+        diplomatic_influence = {
+	        who = BAV
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = BAD
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = WUR
+	        value = 400
+        }
+        badboy = 10
+        clr_global_flag = SCA_killing_AUS
+        AUS = { clr_country_flag = custom_treaty_loser }
+        set_country_flag = german_south_under_SCA
+    }
+    
+    #Destroy Austria
+    option = {
+        name = "EVTOPTB900000006"
+        inherit = AUS
+        any_owned = {
+             limit = {
+                 is_core = BAV
+            }
+            secede_province = BAV
+            remove_core = AUS
+        }
+        any_owned = {
+             limit = {
+                is_core = BAD
+             }
+            secede_province = BAD
+            remove_core = AUS
+        }
+        any_owned = {
+            limit = {
+                OR= {
+                    is_core = WUR
+                    is_core = SGM
+                    is_core = HOH
+                }
+            }
+            secede_province = WUR
+            remove_core = AUS
+        }
+        any_owned = {
+             limit = {
+                is_core = ALS
+             }
+            secede_province = ALS
+            remove_core = AUS
+        }
+        any_owned = {
+             limit = {
+                is_core = HUN
+                NOT = {
+                    OR = {
+                        province_id = 623
+                        province_id = 624
+                        province_id = 3282
+                    }
+                }
+             }
+            secede_province = HUN
+            remove_core = AUS
+        }
+        any_owned = {
+             limit = {
+                OR = {
+                    is_core = CRO
+                    is_core = DLM
+                    is_core = BOS
+                    province_id = 3289
+                }
+             }
+            secede_province = CRO
+            remove_core = AUS
+        }
+        any_owned = {
+             limit = {
+                is_core = GLM
+             }
+            secede_province = GLM
+            remove_core = AUS
+        }
+        any_owned = {
+             limit = {
+                is_core = BOH
+             }
+            secede_province = BOH
+            add_core = AUS
+        }
+        any_owned = {
+            limit ={
+                is_core = AUS
+            }
+            secede_province = AUS
+        }
+        create_vassal = BAV
+        create_vassal = BAD
+        create_vassal = WUR
+        create_vassal = AUS
+        create_vassal = BOH
+        diplomatic_influence = {
+	        who = BAV
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = BAD
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = WUR
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = AUS
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = BOH
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = GLM
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = CRO
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = HUN
+	        value = 400
+        }
+        badboy = 20
+        clr_global_flag = SCA_killing_AUS
+        AUS = { clr_country_flag = custom_treaty_loser }
+        set_country_flag = german_south_under_SCA
+    }
+}
+
+#KUK ver
+country_event = {
+    id = 900000007
+    title = "EVTNAME900000007"
+    desc = "EVTDESC900000007"
+    picture = "placeholder"
+    
+    trigger = {
+        tag = SCA
+        has_global_flag = SCA_killing_KUK
+        KUK = { has_country_flag = custom_treaty_loser }
+    }
+    
+    mean_time_to_happen = {
+        days = 0
+    }
+
+    fire_only_once = yes
+    
+    #Take only SGF
+    option = {
+        name = "EVTOPTA900000007"
+        KUK = {
+            any_owned = {
+                limit = {
+                    OR = {
+                        is_core = BAV
+                        is_core = BAD
+                        is_core = WUR
+                        is_core = SGM
+                        is_core = HOH
+                    }
+                }
+                secede_province =THIS
+            }
+        }
+        any_owned = {
+             limit = {
+                 is_core = BAV
+            }
+            secede_province = BAV
+            remove_core = KUK
+        }
+        any_owned = {
+             limit = {
+                is_core = BAD
+             }
+            secede_province = BAD
+            remove_core = KUK
+        }
+        any_owned = {
+            limit = {
+                OR= {
+                    is_core = WUR
+                    is_core = SGM
+                    is_core = HOH
+                }
+            }
+            secede_province = WUR
+            remove_core = KUK
+        }
+        create_vassal = BAV
+        create_vassal = BAD
+        create_vassal = WUR
+        diplomatic_influence = {
+	        who = BAV
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = BAD
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = WUR
+	        value = 400
+        }
+        badboy = 10
+        clr_global_flag = SCA_killing_KUK
+        KUK = { clr_country_flag = custom_treaty_loser }
+        set_country_flag = german_south_under_SCA
+    }
+    
+    #Destroy Austria
+    option = {
+        name = "EVTOPTB900000007"
+        inherit = KUK
+        any_owned = {
+             limit = {
+                 is_core = BAV
+            }
+            secede_province = BAV
+            remove_core = KUK
+        }
+        any_owned = {
+             limit = {
+                is_core = BAD
+             }
+            secede_province = BAD
+            remove_core = KUK
+        }
+        any_owned = {
+            limit = {
+                OR= {
+                    is_core = WUR
+                    is_core = SGM
+                    is_core = HOH
+                }
+            }
+            secede_province = WUR
+            remove_core = KUK
+        }
+        any_owned = {
+             limit = {
+                is_core = ALS
+             }
+            secede_province = ALS
+            remove_core = KUK
+        }
+        any_owned = {
+             limit = {
+                is_core = HUN
+                NOT = {
+                    OR = {
+                        province_id = 623
+                        province_id = 624
+                        province_id = 3282
+                    }
+                }
+             }
+            secede_province = HUN
+            remove_core = KUK
+        }
+        any_owned = {
+             limit = {
+                OR = {
+                    is_core = CRO
+                    is_core = DLM
+                    is_core = BOS
+                    province_id = 3289
+                }
+             }
+            secede_province = CRO
+            remove_core = KUK
+        }
+        any_owned = {
+             limit = {
+                OR = {
+                    is_core = GLM
+                    is_core = BKV
+                }
+             }
+            secede_province = GLM
+            remove_core = KUK
+        }
+        any_owned = {
+             limit = {
+                is_core = BOH
+             }
+            secede_province = BOH
+            remove_core = KUK
+            add_core = AUS
+        }
+        any_owned = {
+            limit ={
+                is_core = KUK
+            }
+            secede_province = AUS
+            remove_core = KUK
+            add_core = AUS
+        }
+        create_vassal = BAV
+        create_vassal = BAD
+        create_vassal = WUR
+        create_vassal = AUS
+        create_vassal = BOH
+        create_vassal = ALS
+        diplomatic_influence = {
+	        who = BAV
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = BAD
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = WUR
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = AUS
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = BOH
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = GLM
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = CRO
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = HUN
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = ALS
+	        value = 400
+        }
+        badboy = 20
+        clr_global_flag = SCA_killing_KUK
+        KUK = { clr_country_flag = custom_treaty_loser }
+        set_country_flag = german_south_under_SCA
+    }
+}
+
+#Victory over Germany
+country_event = {
+    id = 900000008
+    title = "EVTNAME900000008"
+    desc = "EVTDESC900000008"
+    picture = "placeholder"
+    
+    trigger = {
+        tag = SCA
+        has_global_flag = SCA_killing_GER
+        GER = { has_country_flag = custom_treaty_loser }
+    }
+    
+    mean_time_to_happen = {
+        days = 0
+    }
+
+    fire_only_once = yes
+
+    option = {
+        name = "EVTOPTA900000008"
+        inherit = GER
+        #Core Setup
+        HAN_528 = { add_core = HAN }
+        HAN_534 = { add_core = HAN }
+        HAN_540 = { add_core = HAN }
+        PRU_581 = { add_core = WES add_core = PRU }
+        585 = { remove_core = PRU }
+        HES_570 = { add_core = RHI add_core = PRU }
+        PRU_575 = { add_core = RHI add_core = PRU }
+        PRU_578 = { add_core = RHI add_core = PRU }
+        PRU_396 = { add_core = RHI add_core = PRU }
+        BAV_571 = { add_core = RHI }
+        NAS_564 = { add_core = HES }
+        HES_566 = { add_core = HES }
+        HES_2560 = { add_core = HES }
+        3301 = { remove_core = HES add_core = HAN }
+        BAD_586 = { add_core = BAD }
+        WUR_589 = { add_core = WUR }
+        HOH_594 = { add_core = WUR }
+        BAV_595 = { add_core = BAV }
+        BAV_599 = { add_core = BAV }
+        PRU_553 = { add_core = SAX add_core = PRU }
+        SAX_558 = { add_core = SAX }
+        ANH_555 = { add_core = SAX }
+        PRU_554 = { add_core = SAX }
+        PRU_544 = { add_core = PRU }
+        PRU_546 = { add_core = PRU }
+        PRU_549 = { add_core = PRU }
+        PRU_690 = { add_core = PRU }
+        PRU_695 = { add_core = PRU }
+        PRU_701 = { add_core = PRU }
+        PRU_682 = { add_core = PRU }
+        3270 = { remove_core = RHI add_core = HES }
+        #Puppet Creation
+        #SGF
+        any_owned = {
+             limit = {
+                 is_core = BAV
+            }
+            secede_province = BAV
+        }
+        any_owned = {
+             limit = {
+                is_core = BAD
+             }
+            secede_province = BAD
+        }
+        any_owned = {
+            limit = {
+                OR= {
+                    is_core = WUR
+                    is_core = SGM
+                    is_core = HOH
+                }
+            }
+            secede_province = WUR
+        }
+        any_owned = {
+             limit = {
+                is_core = ALS
+             }
+            secede_province = ALS
+        }
+        create_vassal = BAV
+        create_vassal = BAD
+        create_vassal = WUR
+        create_vassal = ALS
+        diplomatic_influence = {
+	        who = BAV
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = BAD
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = WUR
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = ALS
+	        value = 400
+        }
+        #NGF
+        any_owned = {
+            limit = {
+                OR = {
+                    is_core = RHI
+                    province_id = 3397
+                }
+            }
+            secede_province = RHI
+        }
+        any_owned = {
+            limit = {
+                OR = {
+                    is_core = HAN
+                    is_core = BRA
+                    is_core = BRE
+                    is_core = OLD
+                    is_core = LIP
+                    is_core = SCL
+                    province_id = 3301
+                    province_id = 3422 
+                }
+                NOT = { province_id = 3300 }
+            }
+            secede_province = HAN
+        }
+        any_owned = {
+            limit = {
+                is_core = WES
+            }
+            secede_province = WES
+        }
+        any_owned = {
+            limit = {
+                is_core = PZN
+            }
+            secede_province = PZN
+            add_core = PRU
+        }
+        any_owned = {
+            limit = {
+                is_core = SLS
+            }
+            secede_province = SLS
+            add_core = PRU
+        }
+        any_owned = {
+            limit = {
+                OR = {
+                    is_core = SAX
+                    is_core = SWG
+                    is_core = SRS
+                    is_core = WEI
+                    is_core = ATB
+                    is_core = REU
+                    is_core = COB
+                    is_core = MEI
+                    is_core = RLE
+                    is_core = ANH
+                    is_core = ANK
+                    is_core = ANB
+                    is_core = RSR
+                    province_id = 3305
+                }
+            }
+            secede_province = SAX
+        }
+        any_owned = {
+            limit = {
+                OR = {
+                    is_core = HES
+                    is_core = HEK
+                    is_core = FRM
+                    is_core = WLD
+                    is_core = NAS
+                    is_core = HEH
+                    province_id = 3270
+                    province_id = 3270
+                }
+            }
+            secede_province = HES
+        }
+        PRU_553 = { 
+            secede_province = SAX
+            add_core = PRU
+        }
+        any_owned = {
+            limit = {
+                NOT = {
+                    OR = {
+                        is_core = PML
+                        is_core = THIS
+                        is_core = HOL
+                        is_core = MEC
+                        is_core = MST
+                        is_core = SCH
+                        is_core = HAM
+                        is_core = ALS
+                        province_id = 3300
+                        province_id = 530
+                        province_id = 3484
+                        province_id = 548
+                        province_id = 547
+                        province_id = 546
+                        province_id = 679
+                        province_id = 680
+                        province_id = 692
+                        province_id = 3484
+                        province_id = 544
+                        province_id = 3427
+                        province_id = 545
+                        #is_colonial = yes
+                        continent = africa
+                        continent = central_africa
+                        continent = west_africa
+                        continent = east_africa
+                        continent = south_africa
+                    }
+                }
+            }
+            secede_province = PRU
+            add_core = PRU
+        }
+        create_vassal = PRU
+        create_vassal = RHI
+        create_vassal = WES
+        create_vassal = PZN
+        create_vassal = SLS
+        create_vassal = HES
+        create_vassal = SAX
+        create_vassal = HAN
+        diplomatic_influence = {
+	        who = PRU
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = HAN
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = RHI
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = WES
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = PZN
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = SLS
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = SAX
+	        value = 400
+        }
+        diplomatic_influence = {
+	        who = HES
+	        value = 400
+        }
+        GER = { clr_country_flag = custom_treaty_loser }
+        badboy = 25
+        clr_global_flag = SCA_killing_GER
+        set_country_flag = german_north_under_SCA
+        set_country_flag = german_south_under_SCA
+    } 
+}

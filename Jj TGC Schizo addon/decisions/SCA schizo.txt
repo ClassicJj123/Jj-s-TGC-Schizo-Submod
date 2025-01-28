@@ -1,0 +1,436 @@
+political_decisions = {
+
+###Expansion schizo###
+
+#Latvia
+SCA_expand_into_latvia = {
+    picture = "annex_united_baltic_duchy"
+    potential = {
+        OR = {
+            tag = SCA
+            tag = NGY
+        }
+        OR = {
+            has_country_flag = Schzio_mod_show
+            has_global_flag = EVERYONE_IS_SCHIZO
+        }
+        EST = { any_core = { is_core = THIS } }
+        NOT = { has_country_flag = SCA_expand_into_LAT }
+    }
+
+    allow = {
+        war = no
+        LAT = {
+			OR = {
+				in_sphere = THIS
+				all_core = {
+						OR = {
+							owned_by = THIS
+						owner = {
+							in_sphere = THIS
+							is_vassal = no
+							war = no
+						}
+						owner = {
+							vassal_of = THIS
+							war = no
+						}
+					}
+				}
+			}
+		}
+    }
+
+    effect = {
+        LAT = { all_core = { add_core = THIS } }
+        any_country = {
+            limit = {
+                any_core ={
+                    is_core = LAT
+                }
+            }
+            any_owned = {
+                limit = {
+                    is_core = LAT
+                }
+                secede_province = THIS
+            }
+        }
+        add_accepted_culture = latvian
+        set_country_flag = SCA_expand_into_LAT
+    }
+}
+
+#Lithuania
+SCA_expand_into_lithuania = {
+    picture = "Grand_Duchy_of_Lithuania"
+    potential = {
+        OR = {
+            tag = SCA
+            tag = NGY
+        }
+        OR = {
+            has_country_flag = Schzio_mod_show
+            has_global_flag = EVERYONE_IS_SCHIZO
+        }
+        LAT = { any_core = { is_core = THIS } }
+        NOT = { has_country_flag = SCA_expand_into_LIT }
+    }
+
+    allow = {
+        war = no
+        LIT = {
+			OR = {
+				in_sphere = THIS
+				all_core = {
+						OR = {
+							owned_by = THIS
+						owner = {
+							in_sphere = THIS
+							is_vassal = no
+							war = no
+						}
+						owner = {
+							vassal_of = THIS
+							war = no
+						}
+					}
+				}
+			}
+		}
+    }
+
+    effect = {
+        LIT = { all_core = { add_core = THIS } }
+        any_country = {
+            limit = {
+                any_core ={
+                    is_core = LIT
+                }
+            }
+            any_owned = {
+                limit = {
+                    is_core = LIT
+                }
+                secede_province = THIS
+            }
+        }
+        add_accepted_culture = lithuanian
+        set_country_flag = SCA_expand_into_LIT
+    }
+}
+
+
+#German coast
+SCA_expand_into_germanic_coast = {
+    potential = {
+        OR = {
+            tag = SCA
+            tag = NGY
+        }
+        OR = {
+            has_country_flag = Schzio_mod_show
+            has_global_flag = EVERYONE_IS_SCHIZO
+        }
+        NOT = {
+            PRU_546 = { is_core = THIS } # Pomerania
+        }
+        LAT = { any_core = { is_core = THIS } }
+        has_country_flag = SCA_german_leadership
+    }
+
+    allow = {
+        war = no
+        EST = { any_core = { is_core = THIS } }
+        LAT = { any_core = { is_core = THIS } }
+    }
+
+    effect = {
+        PRU_546 = { add_core = THIS } # Pomerania
+        PRU_544 = { add_core = THIS } # Mecklenburg
+        HOL_369 = { add_core = THIS } # Holstein
+        infamy = 6
+    }
+}
+
+#Declare intention of German leadership
+SCA_declare_german_leadership_intention = {
+    picture = "SCA_Germania"
+    potential = {
+        tag = SCA
+        OR = {
+            has_country_flag = Schzio_mod_show
+            has_global_flag = EVERYONE_IS_SCHIZO
+        }
+        NOT = { has_country_flag = SCA_german_leadership }
+    }
+
+    allow = {
+        war = no
+        has_global_flag = SCA_east_secure
+    }
+
+    effect = {
+        set_global_flag = SCA_german_leadership
+        set_country_flag = SCA_german_leadership
+    }
+}
+
+##Kill German unions##
+
+#Kill Prussia
+SCA_kill_PRU = {
+    potential = {
+        tag = SCA
+        OR = {
+            has_country_flag = Schzio_mod_show
+            has_global_flag = EVERYONE_IS_SCHIZO
+        }
+        has_global_flag = SCA_german_leadership
+        NOT = {
+            OR = {
+                has_country_flag = custom_treaty_loser
+                PRU = { has_country_flag = custom_treaty_loser }
+                has_country_flag = german_north_under_SCA
+            }
+        }
+        exists = PRU
+        war = no
+    }
+
+    allow = {
+        war = no
+    }
+
+    effect = {
+        war = {
+            target = PRU
+            attacker_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            defender_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            call_ally = no
+        }
+        set_global_flag = SCA_killing_PRU
+    }
+}
+
+#Kill NGF
+SCA_kill_NGF = {
+    potential = {
+        tag = SCA
+        OR = {
+            has_country_flag = Schzio_mod_show
+            has_global_flag = EVERYONE_IS_SCHIZO
+        }
+        NOT = {
+            OR = {
+                has_country_flag = custom_treaty_loser
+                NGF = { has_country_flag = custom_treaty_loser }
+                has_country_flag = german_north_under_SCA
+            }
+        }
+        has_global_flag = SCA_german_leadership
+        exists = NGF
+        war = no
+    }
+
+    allow = {
+        war = no
+    }
+
+    effect = {
+        war = {
+            target = NGF
+            attacker_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            defender_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            call_ally = no
+        }
+        set_global_flag = SCA_killing_NGF
+    }
+}
+
+#Austria owns SGF lands
+SCA_kill_AUS = {
+    potential = {
+        tag = SCA
+        OR = {
+            has_country_flag = Schzio_mod_show
+            has_global_flag = EVERYONE_IS_SCHIZO
+        }
+        NOT = {
+            OR = {
+                has_country_flag = custom_treaty_loser
+                AUS = { has_country_flag = custom_treaty_loser }
+                has_country_flag = german_south_under_SCA
+            }
+        }
+        has_global_flag = SCA_german_leadership
+        AUS = {
+            has_country_flag = inherit_sgf
+        }
+        exists = AUS
+        has_country_flag = german_north_under_SCA
+        war = no
+    }
+
+    allow = {
+        war = no
+    }
+
+    effect = {
+        war = {
+            target = AUS
+            attacker_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            defender_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            call_ally = no
+        }
+        set_global_flag = SCA_killing_AUS
+    }
+}
+
+#Austria-Hungary owns SGF lands
+SCA_kill_KUK = {
+    potential = {
+        tag = SCA
+        OR = {
+            has_country_flag = Schzio_mod_show
+            has_global_flag = EVERYONE_IS_SCHIZO
+        }
+        NOT = {
+            OR = {
+                has_country_flag = custom_treaty_loser
+                AUS = { has_country_flag = custom_treaty_loser }
+                has_country_flag = german_south_under_SCA
+            }
+        }
+        has_global_flag = SCA_german_leadership
+        KUK = {
+            has_country_flag = inherit_sgf
+        }
+        exists = KUK
+        has_country_flag = german_north_under_SCA
+        war = no
+    }
+
+    allow = {
+        war = no
+    }
+
+    effect = {
+        war = {
+            target = KUK
+            attacker_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            defender_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            call_ally = no
+        }
+        set_global_flag = SCA_killing_KUK
+    }
+}
+
+#Germany is a thing
+SCA_kill_GER = {
+    potential = {
+        tag = SCA
+        OR = {
+            has_country_flag = Schzio_mod_show
+            has_global_flag = EVERYONE_IS_SCHIZO
+        }
+        NOT = {
+            OR = {
+                has_country_flag = custom_treaty_loser
+                GER = { has_country_flag = custom_treaty_loser }
+                has_country_flag = german_north_under_SCA
+            }
+        }
+        has_global_flag = SCA_german_leadership
+        exists = GER
+        war = no
+    }
+
+    allow = {
+        war = no
+    }
+
+    effect = {
+        war = {
+            target = GER
+            attacker_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            defender_goal = {
+                casus_belli = custom_treaty_cb
+            }
+            call_ally = no
+        }
+        set_global_flag = SCA_killing_GER
+    }
+}
+
+###Formables###
+
+    #From Nordic Germany
+    SCA_from_NGY = {
+        picture = "SCA_Germania"
+        potential = {
+            tag = SCA
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+            has_country_flag = SCA_german_leadership
+        }
+
+        allow = {
+            GER = {
+                all_core = {
+                    OR = {
+				 	    owned_by = THIS
+				 	    owner = {
+					 	    in_sphere = THIS
+				 	    }
+			 	    }
+                }
+            }
+        }
+
+        effect = {
+		    change_tag = NGY
+		    any_country = {
+			    limit = {
+				    OR = {
+                        AND = {
+					        is_culture_group = germanic
+					        in_sphere = THIS
+				        }
+                        AND = {
+                            OR = {
+                                tag = ALS
+                                tag = PZN
+                                tag = BOH
+                                tag = SLS
+                            }
+                            in_sphere = THIS
+                        }
+                    }
+			    }
+			    annex_to = NGY
+		    }
+	    }
+    }
+
+}
