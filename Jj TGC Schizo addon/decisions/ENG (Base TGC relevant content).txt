@@ -243,13 +243,7 @@ political_decisions = {
 					owns = 80
 					owns = 82
 					owns = 13
-					vassal_of = {
-						any_country = {
-							limit = {
-								has_country_flag = british_content
-							}
-						}
-					}
+					is_our_vassal = THIS
 				}
 				AND = {
 					year = 1875
@@ -257,33 +251,15 @@ political_decisions = {
 					OR = {
 						owns = 13
 						RPL = {
-							vassal_of = {
-								any_country = {
-									limit = {
-										has_country_flag = british_content
-									}
-								}
-							}
+							is_our_vassal = THIS
 							owns = 13
 						}
 						COL = {
-							vassal_of = {
-								any_country = {
-									limit = {
-										has_country_flag = british_content
-									}
-								}
-							}
+							is_our_vassal = THIS
 							owns = 13
 						}
 						CAN = {
-							vassal_of = {
-								any_country = {
-									limit = {
-										has_country_flag = british_content
-									}
-								}
-							}
+							is_our_vassal = THIS
 							owns = 13
 						}
 					}
@@ -1811,13 +1787,7 @@ political_decisions = {
 				treasury = -10000
 				FIJ = { government = colonial_company }
 				2454 = {
-					secede_province = { 
-						any_country = {
-							limit = {
-								has_country_flag = british_content
-							}
-						}
-					}
+					secede_province = THIS
 					naval_base = 1
 				}
 			}
@@ -1881,7 +1851,7 @@ political_decisions = {
 						duration = 365
 					}
 				}
-				NZL = { all_core = { remove_core = ENG } }
+				NZL = { all_core = { remove_core = THIS } }
 			}
 			ai_will_do = { factor = 1 }
 		}
@@ -1954,27 +1924,9 @@ political_decisions = {
 					exists = yes
 					is_greater_power = no
 					OR = {
-						substate_of = {
-							any_country  ={
-								limit = {
-									has_country_flag = british_content
-								}
-							}
-						}
-						vassal_of = {
-							any_country  ={
-								limit = {
-									has_country_flag = british_content
-								}
-							}
-						}
-						in_sphere = {
-							any_country  ={
-								limit = {
-									has_country_flag = british_content
-								}
-							}
-						}
+						substate_of = THIS
+						vassal_of = THIS
+						in_sphere = THIS
 					}
 				}
 			}
@@ -2129,13 +2081,7 @@ political_decisions = {
 					exists = yes
 					is_vassal = no
 					NOT = { 
-						vassal_of = {
-							any_country  ={
-								limit = {
-									has_country_flag = british_content
-								}
-							}
-						}
+						vassal_of = THIS
 					}
 				}
 				NOT = { year = 1855 }
@@ -2143,54 +2089,28 @@ political_decisions = {
 			}
 
 			allow = {
-				any_country = {
-					limit = {
-						has_country_flag = british_content
-					}
+				THIS = {
 					war = no
 					NOT = { truce_with = AFG }
 				}
 				AFG = {
 					OR = {
 						neighbour = EIC
-						neighbour = {
-							any_country = {
-								limit = {
-									has_country_flag = british_content
-								}
-							}
-						}
+						neighbour = THIS
 					}
 					NOT = {
-						relation = { who = { any_country = { limit = { has_country_flag = british_content } } } value = 150 }
-						alliance_with = {
-							any_country = {
-								limit = {
-									has_country_flag = british_content
-								}
-							}
-						}
+						relation = { who = THIS value = 150 }
+						alliance_with = THIS
 					}
 					any_neighbor_country = {
-						vassal_of = {
-							any_country = {
-								limit = {
-									has_country_flag = british_content
-								}
-							}
-						} 
+						vassal_of = THIS
 					}
 				}
 			}
 
 			effect = {
 				set_country_flag = anglo_afghan_war
-				any_country = {
-					limit = {
-						has_country_flag = british_content
-					}
-					country_event = 99100
-				} 
+				THIS =  { country_event = 99100 }
 			}
 
 			ai_will_do = { factor = 1 }
@@ -2356,7 +2276,7 @@ political_decisions = {
 				primary_culture = british
 				OR = {
 					AND = {
-						tag = ENG
+						has_country_flag = british_content
 						EIC = { exists = no }
 					}
 					AND = {
@@ -2404,7 +2324,7 @@ political_decisions = {
 				primary_culture = british
 				OR = {
 					AND = {
-						tag = ENG
+						has_country_flag = british_content
 						EIC = { exists = no }
 					}
 					AND = {
@@ -2486,7 +2406,7 @@ political_decisions = {
 			potential = {
 				primary_culture = british
 				OR = {
-					tag = ENG
+					has_country_flag = british_content
 					tag = EIC
 				}
 				is_greater_power = yes
@@ -2580,7 +2500,7 @@ political_decisions = {
 		form_rajputana_outside = {
 			picture = form_rajputana
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				civilized = yes
 				OR = {
 					NOT = { exists = EIC }
@@ -2744,7 +2664,7 @@ political_decisions = {
 				}
 				RAJ = {
 					civilized = yes
-					military_access = ENG
+					military_access = THIS
 					government = colonial_company
 				}
 				1268 = { secede_province = RAJ }
@@ -2752,7 +2672,10 @@ political_decisions = {
 				1266 = { secede_province = RAJ }
 				1265 = { secede_province = RAJ }
 				1267 = { secede_province = RAJ }
-				ENG = {
+				any_country = {
+					limit = {
+						has_country_flag = british_content
+					}
 					military_access = RAJ
 					diplomatic_influence = {
 						who = RAJ
@@ -2778,7 +2701,7 @@ political_decisions = {
 		form_baluchistan_agency = {
 			picture = form_baluchistan
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				civilized = yes
 				OR = {
 					NOT = { exists = EIC }
@@ -2903,7 +2826,7 @@ political_decisions = {
 				}
 				BLC = {
 					civilized = yes
-					military_access = ENG
+					military_access = THIS
 					government = colonial_company
 				}
 			}
@@ -2913,7 +2836,7 @@ political_decisions = {
 		form_central_india_agency = {
 			picture = map_india
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				civilized = yes
 				OR = {
 					NOT = { exists = EIC }
@@ -3022,7 +2945,7 @@ political_decisions = {
 				}
 				BUN = {
 					civilized = yes
-					military_access = ENG
+					military_access = THIS
 					government = colonial_company
 				}
 			}
@@ -3031,23 +2954,23 @@ political_decisions = {
 
 		cleanup_eic = {
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				ai = yes
 				war = yes
 				OR = {
 					EIC = {
 						OR = {
-							vassal_of = ENG
-							substate_of = ENG
+							vassal_of = THIS
+							substate_of = THIS
 						}
 						exists = yes
 					}
 					RAJ = {
 						OR = {
-							vassal_of = ENG
-							substate_of = ENG
+							vassal_of = THIS
+							substate_of = THIS
 						}
-						alliance_with = ENG
+						alliance_with = THIS
 						exists = yes
 					}
 				}
@@ -3057,37 +2980,37 @@ political_decisions = {
 			allow = {
 				OR = {
 					AND = {
-						any_greater_power = { war_with = ENG NOT = { war_with = EIC } }
+						any_greater_power = { war_with = THIS NOT = { war_with = EIC } }
 						EIC = {
 							OR = {
-								vassal_of = ENG
-								substate_of = ENG
+								vassal_of = THIS
+								substate_of = THIS
 							}
 							exists = yes
 							war = no
 						}
 					}
 					AND = {
-						any_neighbor_country = { war_with = ENG NOT = { war_with = EIC } }
+						any_neighbor_country = { war_with = THIS NOT = { war_with = EIC } }
 						EIC = {
 							OR = {
-								vassal_of = ENG
-								substate_of = ENG
+								vassal_of = THIS
+								substate_of = THIS
 							}
 							exists = yes
 							war = no
 						}
 					}
 					AND = {
-						any_greater_power = { war_with = ENG NOT = { war_with = RAJ } }
+						any_greater_power = { war_with = THIS NOT = { war_with = RAJ } }
 						RAJ = {
 							OR = {
-								vassal_of = ENG
-								substate_of = ENG
+								vassal_of = THIS
+								substate_of = THIS
 							}
 							exists = yes
 							war = no
-							alliance_with = ENG
+							alliance_with = THIS
 						}
 					}
 					AND = {
@@ -3116,7 +3039,7 @@ political_decisions = {
 
 		renew_alliance_british_india = {
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				ai = yes
 				is_greater_power = yes
 				war = no
@@ -3327,7 +3250,7 @@ political_decisions = {
 		sovereign_base_area_cyprus = { # TODO disabled since Akrotiri and Dhekelia aren't a province anymore
 			picture = sovereign_base_area
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				exists = no
 				is_greater_power = yes
 				CYP = { exists = yes in_sphere = THIS vassal_of = THIS ai = yes }
@@ -3351,15 +3274,15 @@ political_decisions = {
 				treasury = -3500
 				badboy = 0.5
 				2690 = {
-					secede_province = ENG
-					add_core = ENG
+					secede_province = THIS
+					add_core = THIS
 					any_pop = { militancy = 5 }
 					naval_base = 1
 				}
 				CYP = { any_pop = { militancy = 5 } }
 				any_country = {
 					limit = { primary_culture = greek }
-					relation = { who = ENG value = -50 }
+					relation = { who = THIS value = -50 }
 				}
 				set_country_flag = sovereign_base_area_cyprus
 			}
@@ -3372,7 +3295,7 @@ political_decisions = {
 			potential = {
 				primary_culture = british
 				OR = {
-					tag = ENG
+					has_country_flag = british_content
 					tag = ENL
 				}
 				year = 1860
@@ -3434,7 +3357,7 @@ political_decisions = {
 		treaty_of_paris_anglo_persian = {
 			picture = "persia_map"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_greater_power = yes
 				is_disarmed = no
 				has_global_flag = anglo_persian_war
@@ -3498,7 +3421,7 @@ political_decisions = {
 		persia_treaty = {
 			picture = "persia_map"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_greater_power = yes
 				is_disarmed = no
 				OR = {
@@ -3537,7 +3460,7 @@ political_decisions = {
 			picture = map_arabia
 
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				year = 1900
 				NOT = {	has_country_flag = apoc	}
 				invention = cracking
@@ -3570,7 +3493,7 @@ political_decisions = {
 		sykes_picot_agreement_no_great_war = { #Carve up the Ottoman Empire without a Great War
 			picture = "sykes_picot"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_disarmed = no
 				OR = {
 					TUR = { has_country_flag = ottomans_to_turks }
@@ -3640,7 +3563,7 @@ political_decisions = {
 		the_asia_minor_agreement = { #Carve up the Ottoman Empire without a Great War - Without France as Ally
 			picture = "sykes_picot"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_disarmed = no
 				OR = {
 					TUR = { has_country_flag = ottomans_to_turks }
@@ -3657,7 +3580,7 @@ political_decisions = {
 					owns = 902
 					owns = 897
 				}
-				FRA = { exists = yes NOT = { alliance_with = ENG } }
+				FRA = { exists = yes NOT = { alliance_with = THIS } }
 				NOT = { RUS = { is_greater_power = yes alliance_with = THIS } }
 				NOT = { has_global_flag = sykes_picot }
 				NOT = { year = 1900 }
@@ -3667,7 +3590,7 @@ political_decisions = {
 				any_greater_power = {
 					NOT = { tag = JAP }
 					NOT = { tag = USA }
-					alliance_with = ENG
+					alliance_with = THIS
 				}
 				TUR = { part_of_sphere = no }
 				war = no
@@ -3691,7 +3614,7 @@ political_decisions = {
 					militancy = 8
 				}
 				any_greater_power = {
-					limit = { alliance_with = ENG }
+					limit = { alliance_with = THIS }
 					country_event = 99972
 				}
 			}
@@ -3746,7 +3669,7 @@ political_decisions = {
 		anglo_kuwait_treaty = {
 			picture = bahrain_trade
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_greater_power = yes
 				is_disarmed = no
 				KWT = {
@@ -3790,7 +3713,7 @@ political_decisions = {
 		weihaiwei_treaty_port_eng = {
 			picture = "weihaiwei_china"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_greater_power = yes
 				owns = 1251
 				owns = 1496
@@ -3821,7 +3744,7 @@ political_decisions = {
 		treaty_of_tientsin = {
 			picture = treaty_of_nanking
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				has_global_flag = second_opium_war
 				has_country_modifier = negotiating_treaty
 				NOT = { owns = 1538 }
@@ -3880,7 +3803,7 @@ political_decisions = {
 				factor = 1
 					modifier = {
 						factor = 0
-						tag = ENG
+						tag = THIS
 						NOT = { owns = 1496 }
 					}
 			}
@@ -3891,7 +3814,7 @@ political_decisions = {
 			potential = {
 				primary_culture = british
 				OR = {
-					tag = ENG
+					has_country_flag = british_content
 					tag = ENL
 				}
 				exists = QNG
@@ -3945,7 +3868,7 @@ political_decisions = {
 			potential = {
 				primary_culture = british
 				OR = {
-					tag = ENG
+					has_country_flag = british_content
 					tag = ENL
 				}
 				TIB = {
@@ -3978,7 +3901,7 @@ political_decisions = {
 		bowring_treaty = {
 			picture = john_bowring
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_greater_power = yes
 				1496 = {
 					OR = {
@@ -4011,7 +3934,7 @@ political_decisions = {
 		royal_niger_company = {
 			picture = george_goldie
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				owns = 1923
 				is_greater_power = yes
 				capital_scope = { continent = europe }
@@ -4071,7 +3994,7 @@ political_decisions = {
 		niger_coast_protectorate = {
 			picture = "oil_rivers_protectorate"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				has_global_flag = berlin_conference
 				is_greater_power = yes
 				owns = 1923
@@ -4142,7 +4065,7 @@ political_decisions = {
 		northern_nigeria_protectorate = {
 			picture = "map_africa"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				has_global_flag = berlin_conference
 				is_greater_power = yes
 				SOK = {
@@ -4190,7 +4113,7 @@ political_decisions = {
 		fourth_ashanti_war = {
 			picture = "map_ghana"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				has_global_flag = berlin_conference
 				is_greater_power = yes
 				OR = {
@@ -4295,7 +4218,7 @@ political_decisions = {
 		zanzibar_protectorate = {
 			picture = zanzibar_protectorate
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				owns = 2029
 				year = 1896
 				is_greater_power = yes
@@ -4325,7 +4248,7 @@ political_decisions = {
 		british_east_africa = {
 			picture = british_east_africa
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				owns = 2029
 				OR = {
 					has_country_flag = treaty_of_heligoland_success
@@ -4348,22 +4271,22 @@ political_decisions = {
 				set_country_flag = british_east_africa
 				ENG_2026 = { # Rift Valley
 					limit = { empty = yes }
-					secede_province = ENG any_pop = { literacy = -0.99 }
+					secede_province = THIS any_pop = { literacy = -0.99 }
 				}
 				ENG_2024 = { # Kenya
 					limit = { empty = yes }
-					secede_province = ENG any_pop = { literacy = -0.99 }
+					secede_province = THIS any_pop = { literacy = -0.99 }
 				}
 				ENG_2019 = { # Uganda
 					limit = { empty = yes }
-					secede_province = ENG any_pop = { literacy = -0.99 }
+					secede_province = THIS any_pop = { literacy = -0.99 }
 				}
 				random_owned = { # Kismayo (Somalia)
 					limit = {
 						NOT = { year = 1890 }
 						1870 = { empty = yes }
 					}
-					1870 = { secede_province = ENG any_pop = { literacy = -0.99 } }
+					1870 = { secede_province = THIS any_pop = { literacy = -0.99 } }
 				}
 				KNY = { government = colonial_company }
 				# TODO maybe do something with the tags that are there in these states like get influence?
@@ -4375,7 +4298,7 @@ political_decisions = {
 		british_somaliland = {
 			picture = "british_somaliland"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				has_global_flag = berlin_conference
 				is_greater_power = yes
 				NOT = { has_country_flag = communist_gov }
@@ -4421,7 +4344,7 @@ political_decisions = {
 		british_sierra_leone = {
 			picture = "rhodesia_renaming_act"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				has_global_flag = berlin_conference
 				is_greater_power = yes
 				NOT = { has_country_flag = communist_gov }
@@ -4599,8 +4522,8 @@ political_decisions = {
 		treaty_of_heligoland = {
 			picture = the_heligoland_question
 			potential = {
-				tag = ENG
-				533 = { owned_by = ENG }
+				has_country_flag = british_content
+				533 = { owned_by = THIS }
 				year = 1881
 				OR = {
 					GER = {
@@ -4694,7 +4617,7 @@ political_decisions = {
 			potential = {
 				primary_culture = british
 				OR = {
-					tag = ENG
+					has_country_flag = british_content
 					tag = ENL
 				}
 				NOT = { has_country_flag = ultimatum_to_portugal_sent }
@@ -4800,7 +4723,7 @@ political_decisions = {
 				RHO = {
 					set_country_flag = post_colonial_country
 					government = dominion
-					all_core = { remove_core = ENG }
+					all_core = { remove_core = THIS }
 				}
 				any_owned = { limit = { is_core = RHO } secede_province = RHO }
 				create_vassal = RHO #KIWI: What is the difference between this decision and the event 44315 in BritishDominions? - Please check.
@@ -4910,7 +4833,7 @@ political_decisions = {
 		british_matabale = {
 			picture = "british_somaliland"
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				ai = yes
 				has_global_flag = berlin_conference
 				is_greater_power = yes
@@ -4949,7 +4872,7 @@ political_decisions = {
 
 		wyke_aycinena_convention = {
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_greater_power = yes
 				year = 1859
 				2190 = {
@@ -4992,7 +4915,7 @@ political_decisions = {
 		#Description: The United Kingdom can demand that Mexico renounce their claim to Belize and cede it if they own it.
 		spencer_treaty = { # by Tecno3000
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_greater_power = yes
 				3472 = { is_core = MEX is_core = BLZ }
 				NOT = { has_country_flag = spencer_treaty }
@@ -5086,7 +5009,7 @@ political_decisions = {
 		mosquito_protectorate = {
 			picture = moskito_coast_reserve
 			potential = {
-				tag = ENG
+				has_country_flag = british_content
 				is_greater_power = yes
 				MSK = { exists = yes in_sphere = THIS }
 				NOT = { has_country_flag = mosquito_protectorate }
@@ -5112,7 +5035,7 @@ political_decisions = {
 						exists = yes
 						owns = 2197
 					}
-					relation = { who = ENG value = -200 }
+					relation = { who = THIS value = -200 }
 				}
 				set_country_flag = mosquito_protectorate
 			}
@@ -5135,30 +5058,30 @@ political_decisions = {
 						}
 						has_global_flag = france_dismantled
 						FRA = { has_country_flag = communist_gov }
-						ENG = { has_country_flag = communist_gov }
+						THIS = { has_country_flag = communist_gov }
 					}
 					AND = {
-						tag = ENG
+						tag = THIS
 						has_country_flag = constitutional_monarchy_gov
 						NOT = { has_global_flag = british_dismantled }
 						has_global_flag = france_dismantled
 						FRA = { has_country_flag = communist_gov }
-						ENG = { has_country_flag = communist_gov }
+						THIS = { has_country_flag = communist_gov }
 					}
 				}
-				2217 = { owned_by = ENG }
+				2217 = { owned_by = THIS }
 				NOT = { has_global_flag = caribbean_federation_formed }
 			}
 
 			allow = {
 				war = no
-				2217 = { owned_by = ENG }
+				2217 = { owned_by = THIS }
 			}
 
 			effect = {
 				set_global_flag = caribbean_federation_formed
 				prestige = 6
-				ENG = {
+				THIS = {
 					any_owned = {
 						limit = {
 							OR = {
@@ -5171,7 +5094,7 @@ political_decisions = {
 							}
 						}
 						add_core = CRB
-						remove_core = ENG
+						remove_core = THIS
 						remove_core = FRA
 					}
 					release = CRB
@@ -5192,7 +5115,7 @@ political_decisions = {
 	mediate_belgian_independence = {
 		picture = sign_treaty_of_london
 		potential = {
-			tag = ENG
+			has_country_flag = british_content
 			is_greater_power = yes
 			BEL = { exists = yes }
 			NET = {
@@ -5261,51 +5184,13 @@ political_decisions = {
 		}
 	}
 
-	found_suez_canal_company_eng_ai = {
-		picture = suezcanal
-		potential = {
-			tag = ENG
-			is_greater_power = yes
-			NOT = { is_canal_enabled = 2 }
-			NOT = { has_global_flag = suez_canal_built }
-			has_global_flag = suez_canal_company_founded
-			NOT = { has_global_flag = suez_canal_company_founded_backup }
-			interchangeable_parts = 1
-			1755 = {
-				owner = {
-					OR = {
-						part_of_sphere = no
-						in_sphere = THIS
-					}
-				}
-			}
-			year = 1875
-		}
-
-		allow = {
-			invention = machine_tools
-			invention = nitroglycerin
-			iron_steamers = 1
-			money = 50100
-			1755 = { owner = { NOT = { truce_with = THIS war_with = THIS is_greater_power = yes } } }
-		}
-
-		effect = {
-			set_global_flag = suez_canal_company_founded_backup
-			prestige = 10
-			treasury = -50000
-			diplomatic_influence = { who = EGY value = 100 }
-			1755 = { owner = { relation = { who = THIS value = 75 } country_event = 36981 } }
-		}
-
-		ai_will_do = { factor = 1 }
-	}
+	#Removed Found the Seuz Cannal Company AI
 
 	#Description: The UK can insist that Brazil abolish slavery.
 	aberdeen_act = {
 		picture = aberdeen_act
 		potential = {
-			tag = ENG
+			has_country_flag = british_content
 			is_greater_power = yes
 			prestige = 400
 			slavery = no_slavery
