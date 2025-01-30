@@ -1,0 +1,431 @@
+###Scripted Wars###
+
+    #Victory over France
+    country_event = {
+        id = 900000009
+        title = "EVTNAME900000009"
+        desc = "EVTDESC900000009"
+        picture = "placeholder"
+    
+        trigger = {
+            OR = {
+                tag = ENG
+                tag = ENL
+            }
+            FRA = { has_country_flag = custom_treaty_loser }
+            has_global_flag = ENG_killing_FRA
+        }
+    
+        mean_time_to_happen = {
+            days = 0
+        }
+
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000009"
+            inherit = FRA
+            badboy = 25
+            clr_global_flag = ENG_killing_FRA
+            FRA = { clr_country_flag = custom_treaty_loser }
+            set_country_flag = ENG_able_to_form_DUA
+        }    
+    }
+
+    #We've lost
+    #No DUA for you, play normal UK
+    country_event = {
+        id = 900000010
+        title = "EVTNAME900000010"
+        desc = "EVTDESC900000010"
+        picture = "placeholder"
+        
+        trigger = {
+            OR = {
+                tag = ENG
+                tag = ENL
+            }
+            has_country_flag = custom_treaty_loser
+            has_global_flag = ENG_killing_FRA
+        }
+        
+        mean_time_to_happen = {
+            days = 0
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000010"
+            prestige = -100
+            any_owned = {
+                limit = {
+                    is_core = FRA
+                }
+                secede_province = FRA
+            }
+            clr_global_flag = ENG_killing_FRA
+            clr_country_flag = custom_treaty_loser
+        }   
+    }
+
+###Base TGC Stuff remade###
+
+    ##India##
+
+    #End of the EIC
+    country_event = {
+        id = 900000032
+        title = "EVTNAME9990000"
+		desc = "EVTDESC9990002"
+        picture = "deliberation"
+        
+        is_triggered_only = yes
+        
+        # Refuse, fight for independence
+        option = {
+            name = "EVTOPTA9990002"
+            3263 = { add_core = HND }
+			remove_country_modifier = eic_balance
+			research_points = 10000
+			civilized = yes
+			DUA = {
+				any_owned = {
+					limit = {
+						is_core = BUR
+						is_overseas = yes
+					}
+					secede_province = THIS
+				}
+				any_owned = {
+					limit = {
+						is_core = HND
+						is_overseas = yes
+					}
+					secede_province = THIS
+				}
+				any_owned = {
+					limit = {
+						is_core = PNJ
+						is_overseas = yes
+					}
+					secede_province = THIS
+				}
+			}
+			FROM = { country_event = 900000033 }
+
+			EIC = {
+				any_pop = {
+					limit = { is_primary_culture = no }
+					militancy = 4
+				}
+			}
+
+			ai_chance = { factor = 0 }
+        }
+        
+
+        option = {
+            name = "EVTOPTB9990002"
+            3263 = { add_core = HND }
+			FROM = { country_event = 9990004 }
+
+			ai_chance = { factor = 100 }
+        }
+        
+    }
+
+    #EIC refuses annexation
+    country_event = {
+        id = 900000033
+        title = "EVTNAME9990003"
+			desc = "EVTDESC9990003"
+        picture = "deliberation"
+        
+        is_triggered_only = yes
+        
+        option = {
+            name = "EVTOPTA9990003"
+            badboy = -10
+				release_vassal = EIC
+				clr_global_flag = eic_spawned # TODO from HPM
+				diplomatic_influence = { who = EIC value = -400 }
+				any_country = {
+					limit = {
+						vassal_of = DUA
+						is_culture_group = south_asian
+					}
+					create_alliance = DUA
+					leave_alliance = EIC
+				}
+				leave_alliance = EIC
+				FROM = {
+					country_event = { id = 900000034 days = 40 }
+					country_event = { id = 900000035 days = 20 }
+				}
+				war = {
+					target = EIC
+					attacker_goal = { casus_belli = civil_war }
+					defender_goal = { casus_belli = status_quo }
+					call_ally = yes
+				}
+				set_global_flag = war_with_EIC_DUA_ver
+        } 
+    }
+
+    #Description: Disloyal Soldiers in Bombay - Maharastra and Beroda join the British
+	country_event = {
+		id = 900000034
+		title = "EVTNAME9990012"
+		desc = "EVTDESC9990012"
+		picture = "boer_war"
+
+		is_triggered_only = yes
+
+		option = {
+			name = "EVTOPTA9990012"
+
+			release = MAH
+			release = BER
+			DUA = {
+				inherit = MAH
+				inherit = BER
+			}
+		}
+	}
+
+	#Description: British Warships Seize Ceylon - the British get Sri Lanka and some ships
+	country_event = {
+		id = 900000035
+		title = "EVTNAME9990013"
+		desc = "EVTDESC9990013"
+		picture = "PDA_Blockade"
+
+		is_triggered_only = yes
+
+		option = {
+			name = "EVTOPTA9990013"
+
+			release = SRI
+			DUA = { inherit = SRI }
+			1321 = {
+				## 20 Manowar ##
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+					sub_unit = { type = manowar value = current }
+				## 20 Commerce Raiders ##
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+					sub_unit = { type = commerce_raider value = current }
+				## 10 Steam Transports ##
+					sub_unit = { type = steam_transport value = current }
+					sub_unit = { type = steam_transport value = current }
+					sub_unit = { type = steam_transport value = current }
+					sub_unit = { type = steam_transport value = current }
+					sub_unit = { type = steam_transport value = current }
+					sub_unit = { type = steam_transport value = current }
+					sub_unit = { type = steam_transport value = current }
+					sub_unit = { type = steam_transport value = current }
+					sub_unit = { type = steam_transport value = current }
+					sub_unit = { type = steam_transport value = current }
+			}
+		}
+	}
+
+    #EIC accepts (Use base event, no conflicting effects)
+
+    #EIC wins
+    country_event = {
+		id = 900000036
+		title = "EVTNAME9990005"
+		desc = "EVTDESC9990005"
+		picture = sepoy
+		major = yes
+
+		trigger = {
+			tag = EIC
+			is_vassal = no
+			has_global_flag = war_with_EIC_DUA_ver
+			war = no
+		}
+
+		mean_time_to_happen = {
+			days = 1
+		}
+
+		fire_only_once = yes
+
+		option = {
+			name = "EVTOPTA9990005"
+
+			prestige = 100
+			civilized = yes
+			government = prussian_constitutionalism
+			any_pop = {
+				limit = {
+					has_pop_culture = british
+					location = { is_core = HND }
+				}
+				reduce_pop = 1.5
+				militancy = -10
+				consciousness = -10
+			}
+			DUA = {
+				prestige = -200
+				release_vassal = EIC
+				diplomatic_influence = { who = EIC value = -400 }
+				any_owned = {
+					limit = {
+						OR = {
+							is_core = HND
+							is_core = SRI
+							is_core = JOH
+							is_core = CHI
+							is_core = BUR
+							is_core = AFG
+							is_core = MLD
+							is_core = PER
+							is_core = SIA
+							is_core = SLG
+							is_core = PRK
+							is_core = IOT
+							is_core = MAU
+						}
+						is_overseas = yes
+					}
+					secede_province = EIC
+				}
+			}
+			any_country = {
+				limit = {
+					vassal_of = DUA
+					any_owned_province = { is_core = HND }
+				}
+				country_event = 9990006
+			}
+
+			ENG_1251 = { add_core = EIC }
+			1304 = { add_core = EIC }
+			1297 = { add_core = EIC }
+			remove_country_modifier = sepoy_mutiny
+			set_global_flag = EIC_independence
+		}
+	}
+
+    #Description: The British Crown Defeated - triggered for British vassals in Asia choose whether to join the EIC or go independent
+		country_event = {
+			id = 900000037
+			title = "EVTNAME9990006"
+			desc = "EVTDESC9990006"
+			picture = sepoy
+
+			is_triggered_only = yes
+
+			# Join EIC
+			option = {
+				name = "EVTOPTA9990006"
+
+				leave_alliance = DUA
+				prestige = -100
+				DUA = {
+					release_vassal = THIS
+					diplomatic_influence = { who = THIS value = -400 }
+				}
+				EIC = {
+					create_vassal = THIS
+					create_alliance = THIS
+					military_access = THIS
+					relation = { who = THIS value = 200 }
+				}
+				government = absolute_monarchy
+
+				ai_chance = { factor = 60 }
+			}
+
+			# Go Independent
+			option = {
+				name = "EVTOPTB9990006"
+
+				leave_alliance = DUA
+				prestige = -100
+				DUA = {
+					release_vassal = THIS
+					diplomatic_influence = { who = THIS value = -400 }
+				}
+				EIC = {
+					casus_belli = { target = THIS type = make_puppet months = 60 }
+					country_event = 9990011
+				}
+
+				ai_chance = { factor = 40 }
+			}
+		}
+    
+    #Big Ben (edited)
+    country_event = {
+
+	    id = 3697001
+	    title = "EVTNAME3697001" #Big Ben Finished
+	    desc = "EVTDESC3697001"
+	    picture = "big_ben_finished"
+
+	    fire_only_once = yes
+	    trigger = {
+		    OR = {
+                primary_culture = british
+                primary_culture = anglois
+            }
+		    OR = { 
+                tag = DUA
+			    tag = ENG
+			    tag = ENL
+		    }
+		    NOT = { has_country_modifier = bigben_construction }
+		    has_country_flag = big_ben_construction
+		    }
+
+	    mean_time_to_happen = { days = 5 }
+
+	    option = {
+		    name = "EVTOPTA3697001"
+		    300 = {
+			    set_province_flag = big_ben_built
+			    add_province_modifier = { name = the_big_ben duration = -1 }
+			    }
+			    prestige = 40
+		}
+	}
