@@ -6836,6 +6836,27 @@ sacrifice_cd = {
 	prussian_separatist_cooldown = {
 	}
 
+	#SGP path#
+
+	tax_free_port = {
+		max_tax = -0.25
+		global_immigrant_attract = 0.1
+	}
+
+	SGP_english_immgrant_wave = {
+		global_immigrant_attract = 0.2
+	}
+
+	SGP_developing_port = {
+	}
+
+	SGP_developed_port = {
+		mine_rgo_size = 1
+		farm_rgo_size = 1
+		mine_RGO_eff = 0.5
+		immigrant_attract = 0.1
+	}
+
 
 
 

@@ -71,7 +71,7 @@
                 remove_province_modifier = prussian_separatist
             }
             any_owned = {
-                imit = {
+                limit = {
                     is_core = PRU
                     NOT = {
                         OR = {
@@ -126,7 +126,7 @@
 	            value = 400
             }
             PRU = {
-                overnment = colonial_company
+                government = colonial_company
             }
             set_variable = { which = prussian_separatist value = 5 }
             add_accepted_culture = north_german
@@ -356,7 +356,9 @@
                 limit = {
                     is_core = PRU
                 }
-                militancy = 5
+                any_pop = {
+                    militancy = 5
+                }
             }
             random_list = {
                 40 = { country_event = { id = 900000020 days = 30 } }
@@ -631,7 +633,6 @@
                         is_core = BAV
                         is_core = BAD
                         is_core = WUR
-                        is_core = HOG
                         is_core = HOH
                         is_core = BOH
                         is_core = AUS
@@ -767,9 +768,9 @@
                         province_id = 3301
                         province_id = 3422 
                     }
-                    secede_province = RHI
-                    add_core = RHI
                 }
+                secede_province = RHI
+                add_core = RHI
             }
             any_owned = {
                 limit = {

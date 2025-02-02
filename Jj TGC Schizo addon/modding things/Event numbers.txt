@@ -2,4 +2,7 @@ Event 900000000: Debug enabler
 Event 900000001-900000008: SCA-NGY events part 1
 Event 900000009-900000010: ENG-DUA events part 1
 Event 900000011-900000031: SCA-NGY events part 2
-Event 900000032-
+Event 900000032-900000038: ENG-DUA events part 2
+Event 900000039-900000046: SGP events 1
+Event 900000047: SCA-NGY events part 3
+Event 900000048: SGP events 2

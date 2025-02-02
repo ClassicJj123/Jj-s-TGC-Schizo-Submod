@@ -1,0 +1,294 @@
+###Matters of Autonomy###
+
+    #The Straits Settlement Ask For More Autonomy
+    country_event = {
+        id = 900000039
+        title = "EVTNAME900000039"
+        desc = "EVTDESC900000039"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        #Give them their own parliament, what can a small island do anyways
+        option = {
+            name = "EVTOPTA900000039"
+            SGP = { country_event = { id = 900000040 days = 15 } }
+            prestige = -50
+        }
+        
+        #Refuse them
+        option = {
+            name = "EVTOPTB900000039"
+            SGP = { country_event = { id = 900000041 days = 15 } }
+            prestige = 50
+        }
+        
+    }
+
+    #The British Accept!
+    country_event = {
+        id = 900000040
+        title = "EVTNAME900000040"
+        desc = "EVTDESC900000040"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        #We must celebrate this!
+        option = {
+            name = "EVTOPTA900000040"
+            prestige = 50
+            political_reform = wealth_voting
+            political_reform = state_equal_weight
+        }
+        
+    }
+
+    #The British Refuse!
+    country_event = {
+        id = 900000041
+        title = "EVTNAME900000041"
+        desc = "EVTDESC900000041"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        #Damn
+        option = {
+            name = "EVTOPTA900000041"
+            
+        }
+        
+    }
+
+    #Dominion status
+    country_event = {
+        id = 900000042
+        title = "EVTNAME900000042"
+        desc = "EVTDESC900000042"
+        picture = "placeholder"
+        
+        is_triggered_only = yes
+        
+        #Hoorah!
+        option = {
+            name = "EVTOPTA900000042"
+            government = dominion
+        }
+        
+    }
+
+###Flavor###
+
+    #Island of modernity in a sea of tribalism
+    country_event = {
+        id = 900000043
+        title = "EVTNAME900000043"
+        desc = "EVTDESC900000043"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = SGP
+            rank = 31 #Lmao good luck getting here
+            NOT = { has_country_flag = new_world_nation }
+        }
+        
+        mean_time_to_happen = {
+            days = 0
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000043"
+            set_country_flag = new_world_nation
+            prestige = 5
+        }
+ 
+    }
+
+    #Fortress Singapore
+    country_event = {
+        id = 900000044
+        title = "EVTNAME900000044"
+        desc = "EVTDESC900000044"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = SGP
+            1384 = { has_building = fort }
+        }
+        
+        mean_time_to_happen = {
+            days = 10
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000044"
+            prestige = 5
+        }
+        
+    }
+
+    #English Immigration Wave
+    country_event = {
+        id = 900000045
+        title = "EVTNAME900000045"
+        desc = "EVTDESC900000045"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = SGP
+            NOT = { has_country_flag = SGP_english_immgrant_wave }
+            NOT = { year = 1900 }
+        }
+
+        mean_time_to_happen = {
+            months = 24 #Happens around once per 2 years
+
+            modifier = {
+                factor = 0.5
+                months = 12
+            }
+        }
+
+        option = {
+            name = "EVTOPTA900000045"
+            set_country_flag = SGP_english_immgrant_wave
+            add_country_modifier = { name = SGP_english_immgrant_wave duration = 50 }
+        }
+        
+    }
+
+    #End of Immigration Wave
+    country_event = {
+        id = 900000046
+        title = "EVTNAME900000046"
+        desc = "EVTDESC900000046"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = SGP
+            has_country_flag = SGP_english_immgrant_wave
+            NOT = { has_country_modifier = SGP_english_immgrant_wave }
+        }
+        
+        mean_time_to_happen = {
+            days = 0
+        }
+    
+        option = {
+            name = "EVTOPTA900000046"
+            clr_country_flag = SGP_english_immgrant_wave
+        }
+        
+    }
+
+    #Malaca sufficiently developed
+    country_event = {
+        id = 900000048
+        title = "EVTNAME900000048"
+        desc = "EVTDESC900000048"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = SGP
+            has_country_flag = SGP_developing_malaca
+            1386 = {
+                NOT = {
+                    has_province_modifier = SGP_developing_port
+                }
+            }
+        }
+        
+        mean_time_to_happen = {
+            days = 10
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000048"
+            D10 = {
+                civilized = no
+            }
+            1386 = { secede_province = D10 }
+            D10 = {
+                civilized = yes
+            }
+            1386 = { secede_province = SGP }
+            1386 = { add_province_modifier = { name = SGP_developed_port duration = 1826 } }
+        }
+        
+    }
+
+    #Penang sufficiently developed
+    country_event = {
+        id = 900000049
+        title = "EVTNAME900000049"
+        desc = "EVTDESC900000049"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = SGP
+            has_country_flag = SGP_developing_penang
+            1388 = {
+                NOT = {
+                    has_province_modifier = SGP_developing_port
+                }
+            }
+        }
+        
+        mean_time_to_happen = {
+            days = 10
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000049"
+            D10 = {
+                civilized = no
+            }
+            1388 = { secede_province = D10 }
+            D10 = {
+                civilized = yes
+            }
+            1388 = { secede_province = SGP }
+            1388 = { add_province_modifier = { name = SGP_developed_port duration = 1826 } }
+        }
+        
+    }
+
+    #The British secede JOH to us
+    country_event = {
+        id = 900000050
+        title = "EVTNAME900000050"
+        desc = "EVTDESC900000050"
+        picture = "placeholder"
+        
+        trigger = {
+            tag = SGP
+            ENG = { owns = 1385 }
+            has_global_flag = SGP_war_JOH
+        }
+        
+        mean_time_to_happen = {
+            days = 0
+        }
+    
+        fire_only_once = yes
+
+        option = {
+            name = "EVTOPTA900000050"
+            ENG = { 
+                1385 = {
+                    secede_province = SGP
+                }
+            }
+        }
+
+    }
+

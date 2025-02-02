@@ -1,0 +1,336 @@
+political_decisions = {
+
+###Play as SGP###
+
+    play_as_SGP_schizo = {
+        picture = map_east_indies
+    
+        potential = { 
+            tag = ENG
+            OR = {
+                has_country_flag = Schzio_mod_show
+                has_global_flag = EVERYONE_IS_SCHIZO
+            }
+        }
+    
+        allow = {
+            
+        }
+    
+        effect = {
+            clr_country_flag = Schzio_mod_show
+            release = SGP
+            create_vassal = SGP
+            change_tag_no_core_switch = SGP
+            SGP = {
+                add_accepted_culture = british
+                set_country_flag = Schzio_mod_show
+                set_country_flag = SGP_schizo_path
+                civilized = yes
+                government = colonial_company
+            }
+        }
+    }
+
+###Flavor####
+
+     ##Development##
+     #It's still 1836, of course the island isn't fully developed
+
+        #Education
+        SGP_invest_into_education = {
+            potential = { 
+                tag = SGP
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+                school_reforms = no_schools
+            }
+    
+            allow = {
+                money = 10000
+            }
+    
+            effect = {
+                social_reform = low_schools
+                treasury = -10000
+            }
+        }
+
+        SGP_invest_into_education_2 = {
+            potential = { 
+                tag = SGP
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+                school_reforms = low_schools
+            }
+    
+            allow = {
+                money = 15000
+            }
+    
+            effect = {
+                social_reform = acceptable_schools
+                treasury = -15000
+            }
+        }
+
+        SGP_invest_into_education_3 = {
+            potential = { 
+                tag = SGP
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+                school_reforms = acceptable_schools
+            }
+    
+            allow = {
+                money = 20000
+            }
+    
+            effect = {
+                social_reform = good_schools
+                treasury = -20000
+            }
+        }
+
+        #Industry
+        SGP_invest_into_shipbuilding = {
+            potential = { 
+                tag = SGP
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+                #can_build_factory = yes
+                NOT = { has_country_flag = SGP_invest_into_shipbuilding }
+            }
+    
+            allow = {
+                money = 15000
+            }
+    
+            effect = {
+                activate_technology = post_nelsonian_thought
+                activate_technology = battleship_column_doctrine
+                activate_technology = clipper_design
+                activate_technology = steamers
+                set_country_flag = SGP_invest_into_shipbuilding
+                treasury = -15000
+            }
+        }
+
+        SGP_build_shipyard = {
+            potential = { 
+                tag = SGP
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+                can_build_factory_in_capital_state = steamer_shipyard
+                NOT = { has_country_flag = SGP_build_shipyard }
+            }
+    
+            allow = {
+                money = 20000
+            }
+    
+            effect = {
+                build_factory_in_capital_state = steamer_shipyard
+                set_country_flag = SGP_build_shipyard
+            }
+        }
+
+        #Leverage our spot on the strait
+        SGP_leverage_strait = {
+            potential = { 
+                tag = SGP
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+                NOT = { has_country_flag = SGP_leverage_strait }
+            }
+    
+            allow = {
+            }
+    
+            effect = {
+                set_country_flag = SGP_leverage_strait
+                add_country_modifier = { name = tax_free_port duration = -1 }
+            }
+        }
+
+        #Develop Malaca
+        SGP_developing_malaca = {
+        
+            potential = { 
+                tag = SGP
+                owns = 1386
+                NOT = { has_country_flag = SGP_developing_malaca }
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+            }
+        
+            allow = {
+                money = 30000
+            }
+        
+            effect = {
+                treasury = -30000
+                set_country_flag = SGP_developing_malaca
+                1386 = {
+                    add_province_modifier = { name = SGP_developing_port duration = 1826 }
+                }
+            }
+        }
+
+        #Develop Penang
+        SGP_developing_Penang = {
+        
+            potential = { 
+                tag = SGP
+                owns = 1388
+                NOT = { has_country_flag = SGP_developing_penang }
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+            }
+        
+            allow = {
+                money = 30000
+            }
+        
+            effect = {
+                treasury = -30000
+                set_country_flag = SGP_developing_penang
+                1388 = {
+                    add_province_modifier = { name = SGP_developing_port duration = 1826 }
+                }
+            }
+        }
+    
+    ##Further autonomy##
+
+        #Send a Letter to Britian
+        SGP_request_further_autonomy = {
+            potential = { 
+                tag = SGP
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+                NOT = { has_country_flag = SGP_request_further_autonomy }
+            }
+    
+            allow = {
+                rank = 51
+            }
+    
+            effect = {
+                ENG = { country_event = 900000039 }
+                set_country_flag = SGP_request_further_autonomy
+            }
+        }
+
+        #Grant SGP dominion status
+        ENG_grant_SGP_dominion = {
+            potential = { 
+                tag = ENG
+                SGP = { 
+                    has_country_flag = SGP_schizo_path
+                    NOT = { government = dominion }
+                }
+                NOT = { has_country_flag = ENG_grant_SGP_dominion }
+            }
+    
+            allow = {
+                SGP = { rank = 31 }
+            }
+    
+            effect = {
+                SGP = { country_event = 900000042 }
+                set_country_flag = ENG_grant_SGP_dominion
+            }
+
+            ai_will_do = {
+                factor = 1
+            }
+        }
+
+    ##Expansion##
+
+        #Buy our cores from the EIC
+        SGP_buy_EIC_malaya = {
+            picture = "map_east_indies"
+        
+            potential = { 
+                tag = SGP
+                has_unclaimed_cores = yes
+                exists = EIC
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+            }
+        
+            allow = {
+                money = 30000
+            }
+        
+            effect = {
+                treasury = -30000
+                EIC = {
+                    treasury = 30000 
+                    any_owned ={
+                        limit = {
+                            is_core = SGP
+                        }
+                        secede_province = SGP
+                    }
+                } 
+            }
+        }
+
+        #Subjugate Johore
+        SGP_subjugate_JOH = {
+            potential = { 
+                tag = SGP
+                exists = JOH
+                OR = {
+                    has_country_flag = Schzio_mod_show
+                    has_global_flag = EVERYONE_IS_SCHIZO
+                }
+                war = no
+            }
+        
+            allow = {
+                military_score = JOH
+                NOT = { truce_with = JOH }
+            }
+        
+            effect = {
+                ENG = {
+                    war = {
+                        target = JOH
+                        attacker_goal = {
+                            casus_belli = establish_protectorate_casus_belli
+                        }
+                        defender_goal = {
+                            casus_belli = status_quo
+                        }
+                        call_ally = yes
+                    }
+                }
+                set_global_flag = SGP_war_JOH
+            }
+        }
+        
+}

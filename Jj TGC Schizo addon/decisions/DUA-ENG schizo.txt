@@ -131,6 +131,7 @@ political_decisions = {
         }
     
         effect = {
+            set_country_flag = ENG_claim_angevin
             FRA_418 = { add_core = THIS }
             FRA_435 = { add_core = THIS }
             426 = { add_core = THIS }

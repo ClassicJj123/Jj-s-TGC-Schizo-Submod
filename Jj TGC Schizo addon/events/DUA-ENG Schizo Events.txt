@@ -394,38 +394,33 @@
 				ai_chance = { factor = 40 }
 			}
 		}
-    
-    #Big Ben (edited)
-    country_event = {
 
-	    id = 3697001
-	    title = "EVTNAME3697001" #Big Ben Finished
-	    desc = "EVTDESC3697001"
-	    picture = "big_ben_finished"
+	##Big Ben##
 
-	    fire_only_once = yes
-	    trigger = {
-		    OR = {
-                primary_culture = british
-                primary_culture = anglois
-            }
-		    OR = { 
-                tag = DUA
-			    tag = ENG
-			    tag = ENL
-		    }
-		    NOT = { has_country_modifier = bigben_construction }
-		    has_country_flag = big_ben_construction
-		    }
+		#Big Ben under construction finish
+		country_event = {
+			id = 900000038
+			title = "EVTNAME3697001" #Big Ben Finished
+			desc = "EVTDESC3697001"
+			picture = "big_ben_finished"
 
-	    mean_time_to_happen = { days = 5 }
+			fire_only_once = yes
 
-	    option = {
-		    name = "EVTOPTA3697001"
-		    300 = {
-			    set_province_flag = big_ben_built
-			    add_province_modifier = { name = the_big_ben duration = -1 }
-			    }
-			    prestige = 40
+			trigger = {
+				tag = DUA
+				NOT = { has_country_modifier = bigben_construction }
+				has_country_flag = big_ben_construction
+			}
+
+			mean_time_to_happen = { days = 5 }
+
+			option = {
+				name = "EVTOPTA3697001"
+				300 = {
+					set_province_flag = big_ben_built
+					add_province_modifier = { name = the_big_ben duration = -1 }
+				}
+				prestige = 40
+			}
+			
 		}
-	}

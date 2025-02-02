@@ -2,9 +2,9 @@
 
 #Eastern Border secure
 country_event = {
-    id = 900000026
-    title = "EVTNAME900000026"
-    desc = "EVTDESC900000026"
+    id = 900000047
+    title = "EVTNAME900000047"
+    desc = "EVTDESC900000047"
     picture = "placeholder"
     
     trigger = {
@@ -21,7 +21,7 @@ country_event = {
     fire_only_once = yes
 
     option = {
-        name = "EVTOPTA900000026"
+        name = "EVTOPTA900000047"
         set_global_flag = SCA_east_secure
     }  
 }
